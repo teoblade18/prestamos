@@ -58,3 +58,7 @@ a {
   text-align: center;
   color: #618264;
 }
+
+.label-error{
+  color: red;
+}
