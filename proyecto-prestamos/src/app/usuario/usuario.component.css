@@ -1,0 +1,12 @@
+/* Modificaciones para alinear los enlaces horizontalmente */
+div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+a {
+  flex: 1;
+  margin: 0;
+}
