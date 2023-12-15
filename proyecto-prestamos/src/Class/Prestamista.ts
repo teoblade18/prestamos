@@ -1,6 +1,6 @@
 import { Usuario } from "./Usuario"
 
-interface Prestamista{
+export interface Prestamista{
   nombre : string,
   capital : number,
   numeroCuenta: string,

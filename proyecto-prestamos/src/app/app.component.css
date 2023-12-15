@@ -54,6 +54,12 @@ button:active{
   background-color: #3A4D39;
 }
 
+button:disabled{
+  background-color: #606160;
+  color: #9eaa9e;
+  cursor: not-allowed;
+}
+
 a {
   text-align: center;
   color: #618264;
