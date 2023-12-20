@@ -9,12 +9,12 @@ import { Prestamista } from '../../Class/Prestamista';
 })
 export class RegistrarPrestamistaComponent {
   prestamista: Prestamista = {
-    nombre: 'Mateo Agudelo',
-    capital: 50000,
-    numeroCuenta: '007786',
+    nombre: '',
+    capital: 0,
+    numeroCuenta: '',
     usuario: {
-      nombreUsuario: 'Magudelo',
-      contrasenia: '123456',
+      nombreUsuario: '',
+      contrasenia: '',
     },
   };
 

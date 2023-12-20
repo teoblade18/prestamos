@@ -4,24 +4,38 @@
       <h1>Registrar Prestamista</h1>
 
       <label for="nombreUsuario">Usuario:</label>
-      <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" name="nombreUsuario" [(ngModel)]="prestamista.usuario.nombreUsuario" required/>
+      <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" #nombreUsuario="ngModel" name="nombreUsuario" [(ngModel)]="prestamista.usuario.nombreUsuario" required/>
+      <div *ngIf="!nombreUsuario.valid && nombreUsuario.touched">
+        <label class="label-error">El usuario es requerido</label>
+      </div>
+
       <label for="contrasenia">Contraseña:</label>
-      <input type="password" id="contrasenia" placeholder="********" name="contrasenia" [(ngModel)]="prestamista.usuario.contrasenia" required minlength="6"/>
+      <input type="password" id="contrasenia" placeholder="********" #contrasenia="ngModel" name="contrasenia" [(ngModel)]="prestamista.usuario.contrasenia" required minlength="6"/>
+      <div *ngIf="prestamista.usuario.contrasenia.length < 6 && contrasenia.touched">
+        <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula y un número</label>
+      </div>
 
       <h3>Datos del Prestamista</h3>
 
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" placeholder="Nombre" name="nombre" [(ngModel)]="prestamista.nombre" required/>
-      <label for="capital">Capital:</label>
-      <input type="number" id="capital" placeholder="Capital en pesos" name="capital" [(ngModel)]="prestamista.capital" required min="0"/>
-      <label for="numeroCuenta">Número de cuenta:</label>
-      <input type="string" id="numeroCuenta" placeholder="Número de cuenta" name="numeroCuenta" [(ngModel)]="prestamista.numeroCuenta" required/>
+      <input type="text" id="nombre" placeholder="Nombre" #nombre="ngModel" name="nombre" [(ngModel)]="prestamista.nombre" required/>
+      <div *ngIf="!nombre.valid && nombre.touched">
+        <label class="label-error">El nombre es requerido</label>
+      </div>
 
-      <div *ngIf="prestamista.usuario.contrasenia.length < 6 ">
-        <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula y un número</label>
+      <label for="capital">Capital:</label>
+      <input type="number" id="capital" #capital = "ngModel" placeholder="Capital en pesos" name="capital" [(ngModel)]="prestamista.capital" required min="0"/>
+      <div *ngIf="!capital.valid && capital.touched">
+        <label class="label-error">El capital es requerido</label>
       </div>
       <div *ngIf="prestamista.capital < 0 ">
         <label class="label-error">El capital no puede ser negativo</label>
+      </div>
+
+      <label for="numeroCuenta">Número de cuenta:</label>
+      <input type="string" id="numeroCuenta" placeholder="Número de cuenta" #numeroCuenta="ngModel" name="numeroCuenta" [(ngModel)]="prestamista.numeroCuenta" required/>
+      <div *ngIf="!numeroCuenta.valid && numeroCuenta.touched">
+        <label class="label-error">El capital es requerido</label>
       </div>
       <div *ngIf="prestamista.nombre.includes('1')">
         <label class="label-error">El nombre no debe tener números</label>
