@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f2f2f2;
 }
 
@@ -24,12 +24,16 @@ h1 {
   color: #3A4D39;
 }
 
+h2,h3{
+  color: #3A4D39;
+}
+
 label,
 input,
 button,
 a {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
@@ -44,6 +48,7 @@ button {
   background-color: #79AC78;
   color: #fff;
   cursor: pointer;
+  margin-top: 15px;
 }
 
 button:hover{
@@ -67,4 +72,9 @@ a {
 
 .label-error{
   color: red;
+
+}
+
+.contain-label-error{
+  margin-bottom: 10px;
 }

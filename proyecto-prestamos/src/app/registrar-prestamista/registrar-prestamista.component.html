@@ -5,13 +5,13 @@
 
       <label for="nombreUsuario">Usuario:</label>
       <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" #nombreUsuario="ngModel" name="nombreUsuario" [(ngModel)]="prestamista.usuario.nombreUsuario" required/>
-      <div *ngIf="!nombreUsuario.valid && nombreUsuario.touched">
+      <div *ngIf="!nombreUsuario.valid && nombreUsuario.touched" class="contain-label-error">
         <label class="label-error">El usuario es requerido</label>
       </div>
 
       <label for="contrasenia">Contraseña:</label>
       <input type="password" id="contrasenia" placeholder="********" #contrasenia="ngModel" name="contrasenia" [(ngModel)]="prestamista.usuario.contrasenia" required minlength="6"/>
-      <div *ngIf="prestamista.usuario.contrasenia.length < 6 && contrasenia.touched">
+      <div *ngIf="prestamista.usuario.contrasenia.length < 6 && contrasenia.touched" class="contain-label-error">
         <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula y un número</label>
       </div>
 
@@ -19,33 +19,29 @@
 
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" placeholder="Nombre" #nombre="ngModel" name="nombre" [(ngModel)]="prestamista.nombre" required/>
-      <div *ngIf="!nombre.valid && nombre.touched">
+      <div *ngIf="!nombre.valid && nombre.touched" class="contain-label-error">
         <label class="label-error">El nombre es requerido</label>
+      </div>
+      <div *ngIf="prestamista.nombre.includes('1')" class="contain-label-error">
+        <label class="label-error">El nombre no debe tener números</label>
       </div>
 
       <label for="capital">Capital:</label>
       <input type="number" id="capital" #capital = "ngModel" placeholder="Capital en pesos" name="capital" [(ngModel)]="prestamista.capital" required min="0"/>
-      <div *ngIf="!capital.valid && capital.touched">
+      <div *ngIf="!capital.valid && capital.touched" class="contain-label-error">
         <label class="label-error">El capital es requerido</label>
       </div>
-      <div *ngIf="prestamista.capital < 0 ">
+      <div *ngIf="prestamista.capital < 0 " class="contain-label-error">
         <label class="label-error">El capital no puede ser negativo</label>
       </div>
 
       <label for="numeroCuenta">Número de cuenta:</label>
       <input type="string" id="numeroCuenta" placeholder="Número de cuenta" #numeroCuenta="ngModel" name="numeroCuenta" [(ngModel)]="prestamista.numeroCuenta" required/>
-      <div *ngIf="!numeroCuenta.valid && numeroCuenta.touched">
-        <label class="label-error">El capital es requerido</label>
-      </div>
-      <div *ngIf="prestamista.nombre.includes('1')">
-        <label class="label-error">El nombre no debe tener números</label>
+      <div *ngIf="!numeroCuenta.valid && numeroCuenta.touched" class="contain-label-error">
+        <label class="label-error">El número de cuenta es requerido</label>
       </div>
 
       <button type="submit" [disabled]="form.invalid">Ingresar</button>
-      <div>
-        <a href="#">Registrarse</a>
-        <a href="#">Recordar contraseña</a>
-      </div>
     </form>
   </section>
 </main>
