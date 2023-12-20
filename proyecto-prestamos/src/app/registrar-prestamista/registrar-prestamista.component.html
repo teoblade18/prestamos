@@ -4,41 +4,47 @@
       <h1>Registrar Prestamista</h1>
 
       <label for="nombreUsuario">Usuario:</label>
-      <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" #nombreUsuario="ngModel" name="nombreUsuario" [(ngModel)]="prestamista.usuario.nombreUsuario" required/>
-      <div *ngIf="!nombreUsuario.valid && nombreUsuario.touched" class="contain-label-error">
+      <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" [formControl]="nombreUsuarioFC"  name="nombreUsuario"/>
+      <div *ngIf="nombreUsuarioFC.errors?.['required'] && nombreUsuarioFC.touched" class="contain-label-error">
         <label class="label-error">El usuario es requerido</label>
       </div>
 
       <label for="contrasenia">Contraseña:</label>
-      <input type="password" id="contrasenia" placeholder="********" #contrasenia="ngModel" name="contrasenia" [(ngModel)]="prestamista.usuario.contrasenia" required minlength="6"/>
-      <div *ngIf="prestamista.usuario.contrasenia.length < 6 && contrasenia.touched" class="contain-label-error">
+      <input type="password" id="contrasenia" placeholder="********" [formControl]="contraseniaFC" name="contrasenia"/>
+      <div *ngIf="contraseniaFC.errors?.['minlength'] && contraseniaFC.touched" class="contain-label-error">
         <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula y un número</label>
+      </div>
+      <div *ngIf="contraseniaFC.errors?.['required'] && contraseniaFC.touched" class="contain-label-error">
+        <label class="label-error">La contraseña es requerida</label>
       </div>
 
       <h3>Datos del Prestamista</h3>
 
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" placeholder="Nombre" #nombre="ngModel" name="nombre" [(ngModel)]="prestamista.nombre" required/>
-      <div *ngIf="!nombre.valid && nombre.touched" class="contain-label-error">
+      <input type="text" id="nombre" placeholder="Nombre" [formControl]="nombreFC" name="nombre"/>
+      <div *ngIf="nombreFC.errors?.['required'] && nombreFC.touched" class="contain-label-error">
         <label class="label-error">El nombre es requerido</label>
       </div>
-      <div *ngIf="prestamista.nombre.includes('1')" class="contain-label-error">
-        <label class="label-error">El nombre no debe tener números</label>
+      <div *ngIf="nombreFC.errors?.['pattern']" class="contain-label-error">
+        <label class="label-error">El nombre no debe tener números ni caracteres especiales</label>
       </div>
 
       <label for="capital">Capital:</label>
-      <input type="number" id="capital" #capital = "ngModel" placeholder="Capital en pesos" name="capital" [(ngModel)]="prestamista.capital" required min="0"/>
-      <div *ngIf="!capital.valid && capital.touched" class="contain-label-error">
+      <input type="number" id="capital" [formControl]="capitalFC" placeholder="Capital en pesos" name="capital"/>
+      <div *ngIf="capitalFC.errors?.['required'] && capitalFC.touched" class="contain-label-error">
         <label class="label-error">El capital es requerido</label>
       </div>
-      <div *ngIf="prestamista.capital < 0 " class="contain-label-error">
+      <div *ngIf="capitalFC.errors?.['min']" class="contain-label-error">
         <label class="label-error">El capital no puede ser negativo</label>
       </div>
 
       <label for="numeroCuenta">Número de cuenta:</label>
-      <input type="string" id="numeroCuenta" placeholder="Número de cuenta" #numeroCuenta="ngModel" name="numeroCuenta" [(ngModel)]="prestamista.numeroCuenta" required/>
-      <div *ngIf="!numeroCuenta.valid && numeroCuenta.touched" class="contain-label-error">
+      <input type="string" id="numeroCuenta" placeholder="Número de cuenta" [formControl]="numeroCuentaFC" name="numeroCuenta"/>
+      <div *ngIf="numeroCuentaFC.errors?.['required'] && numeroCuentaFC.touched" class="contain-label-error">
         <label class="label-error">El número de cuenta es requerido</label>
+      </div>
+      <div *ngIf="numeroCuentaFC.errors?.['pattern']" class="contain-label-error">
+        <label class="label-error">Solo puedes escribir números en este campo</label>
       </div>
 
       <button type="submit" [disabled]="form.invalid">Ingresar</button>
