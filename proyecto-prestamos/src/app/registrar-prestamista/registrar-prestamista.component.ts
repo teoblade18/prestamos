@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { NgModel, Validators } from '@angular/forms';
+import { FormGroup, FormControl, NgModel , Validators} from '@angular/forms';
 import { Prestamista } from '../../Class/Prestamista';
-import { FormControl} from '@angular/forms';
-import { min } from 'rxjs';
 
 @Component({
   selector: 'app-registrar-prestamista',
@@ -11,11 +9,35 @@ import { min } from 'rxjs';
 })
 export class RegistrarPrestamistaComponent {
 
-  nombreUsuarioFC = new FormControl('',Validators.required);
-  contraseniaFC = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  nombreFC = new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)])
-  capitalFC = new FormControl('', [Validators.required, Validators.min(0)]);
-  numeroCuentaFC = new FormControl ('', [Validators.required, Validators.pattern(/^\d+$/)])
+  //#region getters
+  get nombreUsuario(){
+    return this.formPrestamista.get('nombreUsuario') as FormControl;
+  }
+
+  get contrasenia(){
+    return this.formPrestamista.get('contrasenia') as FormControl;
+  }
+
+  get nombre(){
+    return this.formPrestamista.get('nombre') as FormControl;
+  }
+
+  get capital(){
+    return this.formPrestamista.get('capital') as FormControl;
+  }
+
+  get numeroCuenta(){
+    return this.formPrestamista.get('numeroCuenta') as FormControl;
+  }
+  //#endregion
+
+  formPrestamista = new FormGroup({
+    'nombreUsuario' : new FormControl('',Validators.required),
+    'contrasenia' : new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/)]),
+    'nombre' : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]),
+    'capital' : new FormControl('', [Validators.required, Validators.min(0)]),
+    'numeroCuenta' : new FormControl ('', [Validators.required, Validators.pattern(/^\d+$/)])
+  });
 
   prestamista: Prestamista = {
     nombre: '',
@@ -28,6 +50,16 @@ export class RegistrarPrestamistaComponent {
   };
 
   validarFormulario() {
+    this.prestamista = {
+      nombre: this.nombreUsuario.value,
+      capital: this.capital.value,
+      numeroCuenta: this.numeroCuenta.value,
+      usuario: {
+        nombreUsuario: this.nombreUsuario.value,
+        contrasenia: this.contrasenia.value,
+      },
+    };
+
     console.log(this.prestamista);
   }
 }
