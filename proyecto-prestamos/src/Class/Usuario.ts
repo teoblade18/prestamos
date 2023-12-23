@@ -1,4 +1,5 @@
 export interface Usuario{
   nombreUsuario : string,
-  contrasenia : string
+  contrasenia : string,
+  email : string
 }

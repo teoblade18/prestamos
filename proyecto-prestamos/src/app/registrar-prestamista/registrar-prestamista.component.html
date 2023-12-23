@@ -11,11 +11,20 @@
 
       <label for="contrasenia">Contraseña:</label>
       <input type="password" id="contrasenia" placeholder="********" formControlName="contrasenia" name="contrasenia"/>
-      <div *ngIf="formPrestamista.get('contrasenia')?.errors?.['pattern']" class="contain-label-error">
+      <div *ngIf="contrasenia.errors?.['pattern']" class="contain-label-error">
         <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial</label>
       </div>
       <div *ngIf="contrasenia.errors?.['required'] && contrasenia.touched" class="contain-label-error">
         <label class="label-error">La contraseña es requerida</label>
+      </div>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="ejemplo@correo.com" formControlName="email" name="email"/>
+      <div *ngIf="email.errors?.['required'] && email.touched" class="contain-label-error">
+        <label class="label-error">El email es requerido</label>
+      </div>
+      <div *ngIf="email.errors?.['email']" class="contain-label-error">
+        <label class="label-error">El email debe ser válido</label>
       </div>
 
       <h3>Datos del Prestamista</h3>

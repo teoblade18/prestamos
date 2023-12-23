@@ -18,6 +18,10 @@ export class RegistrarPrestamistaComponent {
     return this.formPrestamista.get('contrasenia') as FormControl;
   }
 
+  get email(){
+    return this.formPrestamista.get('email') as FormControl;
+  }
+
   get nombre(){
     return this.formPrestamista.get('nombre') as FormControl;
   }
@@ -36,7 +40,8 @@ export class RegistrarPrestamistaComponent {
     'contrasenia' : new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/)]),
     'nombre' : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]),
     'capital' : new FormControl('', [Validators.required, Validators.min(0)]),
-    'numeroCuenta' : new FormControl ('', [Validators.required, Validators.pattern(/^\d+$/)])
+    'numeroCuenta' : new FormControl ('', [Validators.required, Validators.pattern(/^\d+$/)]),
+    'email' : new FormControl('', [Validators.required, Validators.email])
   });
 
   prestamista: Prestamista = {
@@ -46,6 +51,7 @@ export class RegistrarPrestamistaComponent {
     usuario: {
       nombreUsuario: '',
       contrasenia: '',
+      email: ''
     },
   };
 
@@ -57,6 +63,7 @@ export class RegistrarPrestamistaComponent {
       usuario: {
         nombreUsuario: this.nombreUsuario.value,
         contrasenia: this.contrasenia.value,
+        email: this.email.value
       },
     };
 
