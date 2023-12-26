@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, NgModel , Validators} from '@angular/forms';
+import { FormGroup, FormControl, NgModel , Validators, FormBuilder} from '@angular/forms';
 import { Prestamista } from '../../Class/Prestamista';
 
 @Component({
@@ -8,6 +8,10 @@ import { Prestamista } from '../../Class/Prestamista';
   styleUrls: ['../app.component.css', './registrar-prestamista.component.css'],
 })
 export class RegistrarPrestamistaComponent {
+
+  constructor(private fb: FormBuilder){
+
+  }
 
   //#region getters
   get nombreUsuario(){
@@ -35,13 +39,13 @@ export class RegistrarPrestamistaComponent {
   }
   //#endregion
 
-  formPrestamista = new FormGroup({
-    'nombreUsuario' : new FormControl('',Validators.required),
-    'contrasenia' : new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/)]),
-    'nombre' : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]),
-    'capital' : new FormControl('', [Validators.required, Validators.min(0)]),
-    'numeroCuenta' : new FormControl ('', [Validators.required, Validators.pattern(/^\d+$/)]),
-    'email' : new FormControl('', [Validators.required, Validators.email])
+  formPrestamista = this.fb.group({
+    'nombreUsuario' : ['',Validators.required],
+    'contrasenia' : ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/)]],
+    'nombre' : ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
+    'capital' : ['', [Validators.required, Validators.min(0)]],
+    'numeroCuenta' : ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    'email' : ['', [Validators.required, Validators.email]]
   });
 
   prestamista: Prestamista = {
