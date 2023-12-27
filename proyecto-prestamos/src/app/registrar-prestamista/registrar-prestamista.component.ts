@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, NgModel , Validators, FormBuilder} from '@angular/forms';
-import { Prestamista } from '../../Class/Prestamista';
+import { PrestamistaI } from '../Models/PrestamistaI';
+import { ResponseI } from '../Models/Response.interface';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-registrar-prestamista',
@@ -9,7 +11,7 @@ import { Prestamista } from '../../Class/Prestamista';
 })
 export class RegistrarPrestamistaComponent {
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private api:ApiService){
 
   }
 
@@ -48,29 +50,34 @@ export class RegistrarPrestamistaComponent {
     'email' : ['', [Validators.required, Validators.email]]
   });
 
-  prestamista: Prestamista = {
+  prestamista: PrestamistaI = {
+    idPrestamista : 0,
     nombre: '',
     capital: 0,
     numeroCuenta: '',
-    usuario: {
+    oUsuario: {
       nombreUsuario: '',
-      contrasenia: '',
+      contraseña: '',
       email: ''
     },
   };
 
-  validarFormulario() {
+  registrarPrestamista() {
     this.prestamista = {
+      idPrestamista : 0,
       nombre: this.nombreUsuario.value,
       capital: this.capital.value,
       numeroCuenta: this.numeroCuenta.value,
-      usuario: {
+      oUsuario: {
         nombreUsuario: this.nombreUsuario.value,
-        contrasenia: this.contrasenia.value,
+        contraseña: this.contrasenia.value,
         email: this.email.value
       },
     };
 
-    console.log(this.prestamista);
+    this.api.registrarPrestamista(this.prestamista).subscribe(data => {
+      console.log(data);
+    });
+
   }
 }
