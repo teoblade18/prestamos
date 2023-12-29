@@ -10,12 +10,13 @@ import { Observable } from "rxjs";
 
 export class ApiService{
 
-  url: string = "http://localhost:5032/api/Prestamista/Guardar"
+  url: string = "http://localhost:5032/"
 
   constructor(private http:HttpClient){  }
 
   registrarPrestamista(form : PrestamistaI): Observable<ResponseI>{
-    let direccion = this.url;
+
+    let direccion = this.url + "api/Prestamista/Guardar";
 
     return this.http.post<ResponseI>(direccion, form);
   }

@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { RegistrarPrestamistaComponent } from './registrar-prestamista/registrar-prestamista.component';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { MenuComponent } from './menu/menu.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuarioComponent,
-    RegistrarPrestamistaComponent
+    RegistrarPrestamistaComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

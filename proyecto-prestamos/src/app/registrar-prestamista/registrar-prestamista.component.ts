@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NgModel , Validators, FormBuilder} from '@angul
 import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ApiService } from '../services/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar-prestamista',
@@ -11,7 +12,7 @@ import { ApiService } from '../services/api/api.service';
 })
 export class RegistrarPrestamistaComponent {
 
-  constructor(private fb: FormBuilder, private api:ApiService){
+  constructor(private fb: FormBuilder, private api:ApiService, private router: Router){
 
   }
 
@@ -76,8 +77,20 @@ export class RegistrarPrestamistaComponent {
     };
 
     this.api.registrarPrestamista(this.prestamista).subscribe(data => {
-      console.log(data);
+
+      let dataResponse: ResponseI = data;
+      console.log(dataResponse);
+
+      if(dataResponse.mensaje == "Prestamista registrado"){
+        localStorage.setItem("token", dataResponse.response);
+        this.router.navigate(['/menu']);
+      }
+
     });
 
+  }
+
+  probarBotonReenvio(){
+    this.router.navigate(['/menu']);
   }
 }
