@@ -5,9 +5,10 @@ import { RegistrarPrestamistaComponent } from './registrar-prestamista/registrar
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path: '', redirectTo:'registrar'},
-  {path: 'registrar', component: AppComponent},
-  {path: 'menu', component: MenuComponent}
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: RegistrarPrestamistaComponent},
+  {path: 'menu', component: MenuComponent},
+  {path: '**', component: RegistrarPrestamistaComponent}
 ];
 
 @NgModule({
