@@ -1,20 +1,27 @@
 <main>
   <section>
-    <form action="submit">
-      <h1>Iniciar Sesión</h1>
+    <form [formGroup]="formUsuario" (ngSubmit)="consultarPrestamista()">
+      <h1>Iniciar Sesión - Prestamista</h1>
 
-      <label for="usuario">Usuario:</label>
-      <input type="text" id="usuario" placeholder="Usuario" required/>
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" placeholder="********" required/>
-
-      <div *ngIf="1 == 1">
-        <label class="label-error">{{mensajeError}}</label>
+      <label for="userOrEmail">Usuario o Email:</label>
+      <input type="text" id="userOrEmail" placeholder="Usuario o Email" formControlName="userOrEmail"  name="userOrEmail"/>
+      <div *ngIf="userOrEmail.errors?.['required'] && userOrEmail.touched" class="contain-label-error">
+        <label class="label-error">El nombre de usuario o Email es requerido</label>
       </div>
 
-      <button type="submit">Ingresar</button>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" placeholder="********" formControlName="contrasenia" name="contrasenia"/>
+      <div *ngIf="contrasenia.errors?.['required'] && contrasenia.touched" class="contain-label-error">
+        <label class="label-error">La contraseña es requerida</label>
+      </div>
+
+      <div *ngIf="errorStatus" class="contain-label-error">
+        <label class="label-error">{{errorMsj}}</label>
+      </div>
+
+      <button type="submit" [disabled]="formUsuario.invalid">Ingresar</button>
       <div>
-        <a href="#">Registrarse</a>
+        <a routerLink="/registrar-prestamista">Registrarse</a>
         <a href="#">Recordar contraseña</a>
       </div>
     </form>

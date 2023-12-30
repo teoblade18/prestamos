@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {FormGroup,
-  FormControl,
-  NgModel,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import {FormGroup,FormControl,NgModel,Validators,FormBuilder} from '@angular/forms';
 import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ApiService } from '../services/api/api.service';
@@ -16,11 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['../app.component.css', './registrar-prestamista.component.css'],
 })
 export class RegistrarPrestamistaComponent {
-  constructor(
-    private fb: FormBuilder,
-    private api: ApiService,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {}
 
   //#region getters
   get nombreUsuario() {
@@ -50,15 +41,7 @@ export class RegistrarPrestamistaComponent {
 
   formPrestamista = this.fb.group({
     nombreUsuario: ['', Validators.required],
-    contrasenia: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/
-        ),
-      ],
-    ],
+    contrasenia: ['',[ Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/)]],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
     capital: ['', [Validators.required, Validators.min(0)]],
     numeroCuenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
@@ -108,7 +91,4 @@ export class RegistrarPrestamistaComponent {
     });
   }
 
-  reiniciarError(){
-    this.errorStatus = false;
-  }
 }
