@@ -4,6 +4,7 @@ import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
+import { encrypt } from '../util/util-encrypt';
 
 @Component({
   selector: 'app-registrar-prestamista',
@@ -76,19 +77,24 @@ export class RegistrarPrestamistaComponent {
       },
     };
 
-    this.api.registrarPrestamista(this.prestamista).subscribe((data) => {
-      let dataResponse: ResponseI = data;
-      console.log(dataResponse);
+    console.log(this.prestamista.oUsuario.contraseña);
 
-      if (dataResponse.mensaje == 'Prestamista registrado') {
-        localStorage.setItem('oPrestamista', dataResponse.response);
-        this.router.navigate(['/menu']);
-      }
-      else{
+    this.api.registrarPrestamista(this.prestamista).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        console.log(dataResponse);
+        if (dataResponse.mensaje == 'Prestamista registrado') {
+          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
+          localStorage.setItem('oPrestamista', jsonResponse);
+          this.router.navigate(['/menu']);
+        }
+      },
+
+      (error) => {
         this.errorStatus = true;
-        this.errorMsj = dataResponse.mensaje;
+        this.errorMsj =  error.mensaje;
       }
-    });
+    );
   }
 
 }

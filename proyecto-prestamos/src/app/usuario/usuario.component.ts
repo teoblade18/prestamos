@@ -4,6 +4,7 @@ import {FormGroup,FormControl,NgModel,Validators,FormBuilder} from '@angular/for
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
 import { ResponseI } from '../Models/Response.interface';
+import { encrypt } from '../util/util-encrypt';
 
 @Component({
   selector: 'app-usuario',
@@ -42,25 +43,28 @@ export class UsuarioComponent {
   consultarPrestamista(){
     this.usuario  = {
       nombreUsuario : this.userOrEmail.value,
-      contraseña : this.contrasenia.value,
+      contraseña : encrypt(this.contrasenia.value),
       email : this.userOrEmail.value
     };
 
-    this.api.consultarPrestamista(this.usuario).subscribe((data) => {
-      let dataResponse: ResponseI = data;
-      console.log(dataResponse);
+    console.log(this.usuario.contraseña);
 
-      if (dataResponse.mensaje == 'ok') {
-        localStorage.setItem('oPrestamista', dataResponse.response.toString());
-        this.router.navigate(['/menu']);
-      }
-      else{
-        this.errorStatus = true;
-        this.errorMsj = dataResponse.mensaje;
-      }
+    this.api.consultarPrestamista(this.usuario).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        console.log(dataResponse);
 
+        if (dataResponse.mensaje == 'ok') {
+          //Esta linea recupera el json: JSON.parse(localStorage.getItem('oPrestamista'))
+          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
+          localStorage.setItem('oPrestamista', jsonResponse);
+          this.router.navigate(['/menu']);
+        }
+      },
+    (error) => {
+      this.errorStatus = true;
+      this.errorMsj =  error.mensaje;
     });
-
   }
 
 }
