@@ -1,0 +1,40 @@
+<main>
+  <section>
+    <form [formGroup]="formCliente" (ngSubmit)="registrarCliente()">
+      <h1>Registrar Cliente</h1>
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" placeholder="Nombre" formControlName="nombre" name="nombre"/>
+      <div *ngIf="nombre.errors?.['required'] && nombre.touched" class="contain-label-error">
+        <label class="label-error">El nombre es requerido</label>
+      </div>
+      <div *ngIf="nombre.errors?.['pattern']" class="contain-label-error">
+        <label class="label-error">El nombre no debe tener números ni caracteres especiales</label>
+      </div>
+
+      <label for="cedula">Cédula:</label>
+      <input type="string" id="cedula" placeholder="Número de cuenta" formControlName="cedula" name="cedula"/>
+      <div *ngIf="cedula.errors?.['required'] && cedula.touched" class="contain-label-error">
+        <label class="label-error">El número de cuenta es requerido</label>
+      </div>
+      <div *ngIf="cedula.errors?.['pattern']" class="contain-label-error">
+        <label class="label-error">Solo puedes escribir números en este campo</label>
+      </div>
+
+      <label for="numeroCuenta">Número de cuenta:</label>
+      <input type="string" id="numeroCuenta" placeholder="Número de cuenta" formControlName="numeroCuenta" name="numeroCuenta"/>
+      <div *ngIf="numeroCuenta.errors?.['required'] && numeroCuenta.touched" class="contain-label-error">
+        <label class="label-error">El número de cuenta es requerido</label>
+      </div>
+      <div *ngIf="numeroCuenta.errors?.['pattern']" class="contain-label-error">
+        <label class="label-error">Solo puedes escribir números en este campo</label>
+      </div>
+
+      <div *ngIf="errorStatus" class="contain-label-error">
+        <label class="label-error">Ocurrió un error al registrar el usuario: {{errorMsj}}</label>
+      </div>
+
+      <button type="submit" [disabled]="formCliente.invalid">Ingresar</button>
+    </form>
+  </section>
+</main>

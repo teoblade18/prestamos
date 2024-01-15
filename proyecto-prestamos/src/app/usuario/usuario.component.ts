@@ -43,7 +43,7 @@ export class UsuarioComponent {
   consultarPrestamista(){
     this.usuario  = {
       nombreUsuario : this.userOrEmail.value,
-      contraseña : encrypt(this.contrasenia.value),
+      contraseña : this.contrasenia.value,
       email : this.userOrEmail.value
     };
 

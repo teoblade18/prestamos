@@ -7,9 +7,6 @@
 </head>
 <body>
 <main>
-  <nav>
-    <a routerLink="/home">Cerrar sesión</a>
-  </nav>
 
   <section>
     <h1>Menú principal</h1>
@@ -17,27 +14,32 @@
     <div>
       <a href="../Clientes/crearClientes.html">
         <label for="cliente">Clientes</label>
-        <img id="cliente" src="../../assets/imgs/usuario.png" />
+        <img id="cliente" src="../../assets/imgs/clientes.png" />
       </a>
 
       <a href="../InicioSesion/InicioSesion.html">
         <label for="prestamos">Préstamos</label>
-        <img id="prestamos" src="../../assets/imgs/dar-dinero.png" alt="" />
+        <img id="prestamos" src="../../assets/imgs/prestamos.png" alt="" />
       </a>
 
       <a href="../InicioSesion/InicioSesion.html">
         <label for="cuenta">Cuenta</label>
-        <img id="cuenta" src="../../assets/imgs/hucha.png" alt="" />
+        <img id="cuenta" src="../../assets/imgs/cuenta.png" alt="" />
       </a>
 
       <a href="../InicioSesion/InicioSesion.html">
         <label for="historial">Historial</label>
-        <img id="historial" src="../../assets/imgs/historial-medico.png" alt="" />
+        <img id="historial" src="../../assets/imgs/historial.png" alt="" />
       </a>
 
       <a href="../InicioSesion/InicioSesion.html">
         <label for="configuracion">Configuraciones</label>
         <img id="configuracion" src="../../assets/imgs/configuraciones.png" alt="" />
+      </a>
+
+      <a (click)="cerrarSesion()">
+        <label for="configuracion">Salir</label>
+        <img id="configuracion" src="../../assets/imgs/salir.png" alt="" style="background-color: rgb(196, 75, 75);"/>
       </a>
     </div>
   </section>

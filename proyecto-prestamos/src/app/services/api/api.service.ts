@@ -4,6 +4,7 @@ import { ResponseI } from "src/app/Models/Response.interface";
 import { HttpClient, HttpErrorResponse  } from "@angular/common/http";
 import { Observable, throwError, catchError } from "rxjs";
 import { UsuarioI } from "src/app/Models/UsuarioI";
+import { ClienteI } from "src/app/Models/ClienteI";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,15 @@ export class ApiService{
   registrarPrestamista(form : PrestamistaI): Observable<ResponseI>{
 
     let direccion = this.url + "api/Prestamista/Guardar";
+
+    return this.http.post<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  registrarCliente(form : ClienteI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Cliente/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
       catchError(this.handleError)

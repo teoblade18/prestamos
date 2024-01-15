@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormGroup,FormControl,NgModel,Validators,FormBuilder} from '@angular/forms';
+import {FormBuilder,FormControl,Validators} from '@angular/forms';
 import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ApiService } from '../services/api/api.service';
