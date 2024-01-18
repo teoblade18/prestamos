@@ -42,6 +42,24 @@ export class ApiService{
     );
   }
 
+  consultarClientes(idPrestamista : number): Observable<ResponseI>{
+
+    let direccion = this.url + `api/Cliente/ObtenerClientesXPrestamista/${idPrestamista}`;
+
+    return this.http.get<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  eliminarCliente(idCliente : number): Observable<ResponseI>{
+
+    let direccion = this.url + `api/Cliente/Eliminar/${idCliente}`;
+
+    return this.http.delete<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {
 
     const customResponse: ResponseI = {

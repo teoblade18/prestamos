@@ -8,7 +8,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { RegistrarPrestamistaComponent } from './registrar-prestamista/registrar-prestamista.component';
 import { HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
-import { CrearClienteComponent } from './crear-cliente/crear-cliente.component'
+import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
+import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CrearClienteComponent } from './crear-cliente/crear-cliente.component'
     UsuarioComponent,
     RegistrarPrestamistaComponent,
     MenuComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
+    ConsultaClientesComponent
   ],
   imports: [
     BrowserModule,

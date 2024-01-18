@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {FormBuilder,FormControl,Validators} from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
 import { ClienteI } from '../Models/ClienteI';
 import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
-import { SesionController } from '../util/sesionController';
 
 @Component({
   selector: 'app-crear-cliente',
@@ -16,6 +15,8 @@ export class CrearClienteComponent {
 
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {}
 
+  @Input() dataEntrante: any;
+
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
   oPrestamistaObject: PrestamistaI = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
 
@@ -24,6 +25,8 @@ export class CrearClienteComponent {
     nombre : '',
     cedula : '',
     numeroCuenta : '',
+    puntaje: 0,
+    maxPrestar: 0,
     idPrestamista: 0
   }
 
@@ -33,6 +36,16 @@ export class CrearClienteComponent {
   ngOnInit(): void {
     if (this.oPrestamistaString == null){
       this.cerrarSesion();
+    }
+    else{
+      if(this.dataEntrante){
+        let clienteEntrante : ClienteI = this.dataEntrante as ClienteI;
+
+
+        this.nombre.setValue(clienteEntrante.nombre);
+        this.cedula.setValue(clienteEntrante.cedula);
+        this.numeroCuenta.setValue(clienteEntrante.numeroCuenta);
+      }
     }
   }
 
@@ -67,6 +80,8 @@ export class CrearClienteComponent {
       nombre : this.nombre.value,
       cedula : this.cedula.value,
       numeroCuenta : this.numeroCuenta.value,
+      puntaje: 0,
+      maxPrestar: 0,
       idPrestamista : this.oPrestamistaObject.idPrestamista
     }
 
@@ -79,7 +94,7 @@ export class CrearClienteComponent {
         if (dataResponse.mensaje == 'Cliente registrado') {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);
-          this.router.navigate(['/menu']);
+          this.router.navigate(['/consultar-clientes']);
         }
       },
 

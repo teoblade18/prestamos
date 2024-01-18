@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú principal</title>
+</head>
+<body>
+<main>
+
+  <h1>Lista de Clientes</h1>
+
+  <a routerLink="/crear-cliente">Nuevo cliente</a>
+
+  <br><br>
+
+  <section *ngFor="let cliente of (clientes)" class="cliente-box">
+    <div *ngIf="cliente.idCliente == clienteEditando">
+      <app-crear-cliente [dataEntrante]="cliente"></app-crear-cliente>
+    </div>
+    <div *ngIf="cliente.idCliente != clienteEditando">
+      <div class="header">
+        <h2>{{ cliente.nombre }}</h2>
+        <div class="botones-header">
+          <div>
+            <button class="editar-btn" (click)="editarCliente(cliente.idCliente)"><img src="./../../assets/imgs/edit.png" alt="editar"></button>
+          </div>
+          <div>
+            <button class="eliminar-btn" (click)="eliminarCliente(cliente.idCliente)"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <label><strong>Cédula: </strong>{{ cliente.cedula }}</label>
+        <label><strong>Número de cuenta: </strong>{{ cliente.numeroCuenta }}</label>
+        <label><strong>Puntaje: </strong>{{ cliente.puntaje }}</label>
+        <label><strong>Máximo a prestar: </strong>{{ cliente.maxPrestar }}</label>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
+
