@@ -1,7 +1,8 @@
 <main>
   <section>
-    <form [formGroup]="formCliente" (ngSubmit)="registrarCliente()">
-      <h1>Registrar Cliente</h1>
+    <form [formGroup]="formCliente">
+      <h1 *ngIf="dataEntrante == null">Registrar Cliente</h1>
+      <h1 *ngIf="dataEntrante != null">Editar Cliente</h1>
 
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" placeholder="Nombre" formControlName="nombre" name="nombre"/>
@@ -34,7 +35,8 @@
         <label class="label-error">Ocurrió un error al registrar el usuario: {{errorMsj}}</label>
       </div>
 
-      <button type="submit" [disabled]="formCliente.invalid">Ingresar</button>
+      <button *ngIf="dataEntrante == null" type="submit" [disabled]="formCliente.invalid" (click)="registrarCliente()">Ingresar</button>
+      <button *ngIf="dataEntrante != null" type="submit" [disabled]="formCliente.invalid" (click)="editarCliente()">Editar</button>
     </form>
   </section>
 </main>

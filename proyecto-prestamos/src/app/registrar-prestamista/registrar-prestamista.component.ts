@@ -77,12 +77,9 @@ export class RegistrarPrestamistaComponent {
       },
     };
 
-    console.log(this.prestamista.oUsuario.contraseña);
-
     this.api.registrarPrestamista(this.prestamista).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        console.log(dataResponse);
         if (dataResponse.mensaje == 'Prestamista registrado') {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);

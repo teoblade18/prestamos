@@ -47,12 +47,9 @@ export class UsuarioComponent {
       email : this.userOrEmail.value
     };
 
-    console.log(this.usuario.contraseña);
-
     this.api.consultarPrestamista(this.usuario).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        console.log(dataResponse);
 
         if (dataResponse.mensaje == 'ok') {
           //Esta linea recupera el json: JSON.parse(localStorage.getItem('oPrestamista'))

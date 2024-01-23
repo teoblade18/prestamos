@@ -16,7 +16,7 @@
 
   <section *ngFor="let cliente of (clientes)" class="cliente-box">
     <div *ngIf="cliente.idCliente == clienteEditando">
-      <app-crear-cliente [dataEntrante]="cliente"></app-crear-cliente>
+      <app-crear-cliente (edicionFinalizada)="finalizarEdicion($event)" [dataEntrante]="cliente"></app-crear-cliente>
     </div>
     <div *ngIf="cliente.idCliente != clienteEditando">
       <div class="header">

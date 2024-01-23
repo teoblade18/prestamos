@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output} from '@angular/core';
 import {FormBuilder,FormControl,Validators} from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
@@ -85,12 +85,9 @@ export class CrearClienteComponent {
       idPrestamista : this.oPrestamistaObject.idPrestamista
     }
 
-    console.log(this.cliente);
-
     this.api.registrarCliente(this.cliente).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        console.log(dataResponse);
         if (dataResponse.mensaje == 'Cliente registrado') {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);
@@ -103,6 +100,36 @@ export class CrearClienteComponent {
         this.errorMsj =  error.mensaje;
       }
     );
+  }
+
+  @Output() edicionFinalizada = new EventEmitter<ClienteI>();
+
+  editarCliente(){
+    let clienteEditado : ClienteI = {
+      idCliente : this.dataEntrante.idCliente,
+      nombre : this.nombre.value,
+      cedula : this.cedula.value,
+      numeroCuenta : this.numeroCuenta.value,
+      puntaje: this.dataEntrante.puntaje,
+      maxPrestar: this.dataEntrante.maxPrestar,
+      idPrestamista : this.dataEntrante.idPrestamista
+    }
+
+    this.api.editarCliente(clienteEditado).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        if (dataResponse.mensaje == 'ok') {
+          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
+          this.edicionFinalizada.emit(clienteEditado);
+        }
+      },
+
+      (error) => {
+        this.errorStatus = true;
+        this.errorMsj =  error.mensaje;
+      }
+    );
+
   }
 
 }

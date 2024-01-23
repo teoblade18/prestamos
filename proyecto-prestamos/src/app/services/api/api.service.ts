@@ -16,6 +16,7 @@ export class ApiService{
 
   constructor(private http:HttpClient){  }
 
+  //#region Prestamista
   consultarPrestamista(form : UsuarioI): Observable<ResponseI>{
     let direccion = this.url + "api/Prestamista/ConsultarXUsuario"
 
@@ -32,7 +33,9 @@ export class ApiService{
       catchError(this.handleError)
     );
   }
+  //#endregion
 
+  //#region Cliente
   registrarCliente(form : ClienteI): Observable<ResponseI>{
 
     let direccion = this.url + "api/Cliente/Guardar";
@@ -51,6 +54,15 @@ export class ApiService{
     );
   }
 
+  editarCliente(form : ClienteI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Cliente/Editar";
+
+    return this.http.put<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   eliminarCliente(idCliente : number): Observable<ResponseI>{
 
     let direccion = this.url + `api/Cliente/Eliminar/${idCliente}`;
@@ -59,6 +71,7 @@ export class ApiService{
       catchError(this.handleError)
     );
   }
+  //#endregion
 
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {
 

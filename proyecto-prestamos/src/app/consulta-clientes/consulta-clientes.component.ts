@@ -29,16 +29,12 @@ export class ConsultaClientesComponent {
     else{
       let oPrestamistaObject: PrestamistaI = JSON.parse(this.oPrestamistaString);
 
-      console.log(oPrestamistaObject);
-
       this.api.consultarClientes(oPrestamistaObject.idPrestamista).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
-          console.log(dataResponse);
           if (dataResponse.mensaje == 'ok') {
             let clientesString = JSON.stringify(dataResponse.response)
             this.clientes = JSON.parse(clientesString);
-            console.log(dataResponse.response);
           }else{
             this.errorStatus = true;
             this.errorMsj =  "No se encontraron clientes para este prestamista.";
@@ -62,19 +58,25 @@ export class ConsultaClientesComponent {
     this.clienteEditando = idCliente;
   }
 
+  finalizarEdicion(clienteEditado : ClienteI){
+    const indiceCliente = this.clientes.findIndex(c => c.idCliente === clienteEditado.idCliente);
+
+    if (indiceCliente !== -1) {
+      this.clientes[indiceCliente] = clienteEditado;
+    }
+
+    this.clienteEditando = 0;
+  }
+
   eliminarCliente( idCliente: number){
-    console.log(idCliente);
 
     this.api.eliminarCliente(idCliente).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        console.log(dataResponse);
 
         if (dataResponse.mensaje == 'ok') {
           //Se filtra de la lista de clientes la que se acaba de eliminar
           this.clientes = this.clientes.filter(c => c.idCliente != idCliente);
-
-          console.log(this.clientes)
         }else{
           this.errorStatus = true;
           this.errorMsj =  "No se encontró el cliente";
