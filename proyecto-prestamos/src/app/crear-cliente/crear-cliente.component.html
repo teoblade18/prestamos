@@ -14,9 +14,9 @@
       </div>
 
       <label for="cedula">Cédula:</label>
-      <input type="string" id="cedula" placeholder="Número de cuenta" formControlName="cedula" name="cedula"/>
+      <input type="string" id="cedula" placeholder="Cédula" formControlName="cedula" name="cedula"/>
       <div *ngIf="cedula.errors?.['required'] && cedula.touched" class="contain-label-error">
-        <label class="label-error">El número de cuenta es requerido</label>
+        <label class="label-error">La cédula es requerida</label>
       </div>
       <div *ngIf="cedula.errors?.['pattern']" class="contain-label-error">
         <label class="label-error">Solo puedes escribir números en este campo</label>
@@ -32,7 +32,7 @@
       </div>
 
       <div *ngIf="errorStatus" class="contain-label-error">
-        <label class="label-error">Ocurrió un error al registrar el usuario: {{errorMsj}}</label>
+        <label class="label-error">Ocurrió un error al registrar el cliente: {{errorMsj}}</label>
       </div>
 
       <button *ngIf="dataEntrante == null" type="submit" [disabled]="formCliente.invalid" (click)="registrarCliente()">Ingresar</button>

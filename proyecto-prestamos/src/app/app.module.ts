@@ -9,7 +9,8 @@ import { RegistrarPrestamistaComponent } from './registrar-prestamista/registrar
 import { HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
-import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component'
+import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
+import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes
     RegistrarPrestamistaComponent,
     MenuComponent,
     CrearClienteComponent,
-    ConsultaClientesComponent
+    ConsultaClientesComponent,
+    CrearPrestamoComponent
   ],
   imports: [
     BrowserModule,

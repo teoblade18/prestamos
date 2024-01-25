@@ -1,0 +1,52 @@
+<main>
+  <section>
+    <form [formGroup]="formPrestamo">
+      <h1 *ngIf="dataEntrante == null">Registrar Préstamo</h1>
+      <h1 *ngIf="dataEntrante != null">Editar Préstamo</h1>
+
+      <label for="fechaInicial">Cliente:</label>
+      <select name="cliente" id="cliente" formControlName="cliente">
+        <option value="0">Seleccionar cliente...</option>
+        <option *ngFor="let item of clientes" [value]="item.idCliente">{{item.nombre}}</option>
+      </select>
+      <div *ngIf="cliente.errors?.['min'] && cliente.touched" class="contain-label-error">
+        <label class="label-error">Debes seleccionar un cliente</label>
+      </div>
+
+      <label for="fechaInicial">Fecha inicial:</label>
+      <input type="date" id="fechaInicial" placeholder="Fecha inicial" formControlName="fechaInicial" name="fechaInicial"/>
+      <div *ngIf="fechaInicial.errors?.['required'] && fechaInicial.touched" class="contain-label-error">
+        <label class="label-error">La fecha inicial es requerida</label>
+      </div>
+
+      <label for="montoInicial">Monto inicial:</label>
+      <input type="number" id="montoInicial" placeholder="Monto inicial" formControlName="montoInicial" name="montoInicial"/>
+      <div *ngIf="montoInicial.errors?.['required'] && montoInicial.touched" class="contain-label-error">
+        <label class="label-error">El monto inicial es requerido</label>
+      </div>
+      <div *ngIf="montoInicial.errors?.['min']" class="contain-label-error">
+        <label class="label-error">El monto inicial debe ser positivo</label>
+      </div>
+
+      <label for="tipoInteres">Tipo interés:</label>
+      <input type="text" id="tipoInteres" placeholder="Tipo interés" formControlName="tipoInteres" name="tipoInteres"/>
+
+      <label for="porcentajeInteres">Porcentaje interés:</label>
+      <input type="number" id="porcentajeInteres" placeholder="Porcentaje interés" formControlName="porcentajeInteres" name="porcentajeInteres"/>
+
+      <label for="diaCorte">Día corte:</label>
+      <input type="text" id="diaCorte" placeholder="Día corte" formControlName="diaCorte" name="diaCorte"/>
+
+      <label for="fechaPago">Fecha pago:</label>
+      <input type="date" id="fechaPago" placeholder="Fecha pago" formControlName="fechaPago" name="fechaPago"/>
+
+      <div *ngIf="errorStatus" class="contain-label-error">
+        <label class="label-error">Ocurrió un error al registrar el préstamo: {{errorMsj}}</label>
+      </div>
+
+      <button  type="submit" [disabled]="formPrestamo.invalid">Ingresar</button>
+      <button *ngIf="dataEntrante != null" type="submit" [disabled]="formPrestamo.invalid">Editar</button>
+
+    </form>
+  </section>
+</main>

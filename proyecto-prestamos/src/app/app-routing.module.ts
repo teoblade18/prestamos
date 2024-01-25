@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
+import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'menu', component: MenuComponent},
   {path: 'crear-cliente', component: CrearClienteComponent},
   {path: 'consultar-clientes', component: ConsultaClientesComponent},
+  {path: 'crear-prestamo', component: CrearPrestamoComponent},
   {path: '**', component: UsuarioComponent}
 ];
 
