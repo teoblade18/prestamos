@@ -28,6 +28,22 @@ export class CrearPrestamoComponent {
     return this.formPrestamo.get('montoInicial') as FormControl;
   }
 
+  get tipoInteres() {
+    return this.formPrestamo.get('tipoInteres') as FormControl;
+  }
+
+  get porcentajeInteres() {
+    return this.formPrestamo.get('porcentajeInteres') as FormControl;
+  }
+
+  get diaCorte() {
+    return this.formPrestamo.get('diaCorte') as FormControl;
+  }
+
+  get fechaPago() {
+    return this.formPrestamo.get('fechaPago') as FormControl;
+  }
+
   oTime = new timeController();
   fechaHoy : string = this.oTime.obtenerFechaHoy();
 
@@ -35,14 +51,16 @@ export class CrearPrestamoComponent {
     cliente: [0, [Validators.required, Validators.min(1)]],
     fechaInicial: [this.fechaHoy , [Validators.required]],
     montoInicial: ['', [Validators.required, Validators.min(1)]],
-    tipoInteres: [0, [Validators.required, Validators.pattern(/^\d+$/)]],
-    porcentajeInteres: [5, [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
-    diaCorte: [0, [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
-    fechaPago: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]]
+    tipoInteres: [0, [Validators.required,  Validators.min(1)]],
+    porcentajeInteres: [5, [Validators.required,  Validators.min(1)]],
+    diaCorte: [0, [Validators.required,  Validators.min(1)]],
+    fechaPago: ['', [Validators.required]]
   });
 
   @Input() dataEntrante : any;
   clientes : ClienteI[] = [];
+  tiposInteres : string[] = ['Compuesto', 'Fijo']
+  diasCorte : any[] = [{id: 1, nombre:'Primero'},{id:2, nombre:'Quincena'},{id: 3, nombre:'Cada quince días'}]
 
   errorStatus: boolean = false;
   errorMsj: string = '';
@@ -79,6 +97,10 @@ export class CrearPrestamoComponent {
   cerrarSesion(){
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  registrarPrestamo(){
+
   }
 
 }

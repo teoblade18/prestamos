@@ -4,7 +4,7 @@
       <h1 *ngIf="dataEntrante == null">Registrar Préstamo</h1>
       <h1 *ngIf="dataEntrante != null">Editar Préstamo</h1>
 
-      <label for="fechaInicial">Cliente:</label>
+      <label for="cliente">Cliente:</label>
       <select name="cliente" id="cliente" formControlName="cliente">
         <option value="0">Seleccionar cliente...</option>
         <option *ngFor="let item of clientes" [value]="item.idCliente">{{item.nombre}}</option>
@@ -28,17 +28,38 @@
         <label class="label-error">El monto inicial debe ser positivo</label>
       </div>
 
-      <label for="tipoInteres">Tipo interés:</label>
-      <input type="text" id="tipoInteres" placeholder="Tipo interés" formControlName="tipoInteres" name="tipoInteres"/>
+      <label for="tipoInteres">Tipo de interés:</label>
+      <select name="tipoInteres" id="tipoInteres" formControlName="tipoInteres">
+        <option value="0">Seleccionar tipo de interés...</option>
+        <option *ngFor="let item of tiposInteres" [value]="item">{{item}}</option>
+      </select>
+      <div *ngIf="tipoInteres.errors?.['min'] && tipoInteres.touched" class="contain-label-error">
+        <label class="label-error">Debes seleccionar un tipo de interés</label>
+      </div>
 
       <label for="porcentajeInteres">Porcentaje interés:</label>
       <input type="number" id="porcentajeInteres" placeholder="Porcentaje interés" formControlName="porcentajeInteres" name="porcentajeInteres"/>
+      <div *ngIf="porcentajeInteres.errors?.['required'] && porcentajeInteres.touched" class="contain-label-error">
+        <label class="label-error">El porcentaje de interés es requerido</label>
+      </div>
+      <div *ngIf="porcentajeInteres.errors?.['min'] && porcentajeInteres.touched" class="contain-label-error">
+        <label class="label-error">El porcentaje de interés debe ser positivo</label>
+      </div>
 
-      <label for="diaCorte">Día corte:</label>
-      <input type="text" id="diaCorte" placeholder="Día corte" formControlName="diaCorte" name="diaCorte"/>
+      <label for="diaCorte">Día de corte:</label>
+      <select name="diaCorte" id="diaCorte" formControlName="diaCorte">
+        <option value="0">Seleccionar día de corte...</option>
+        <option *ngFor="let item of diasCorte" [value]="item.id">{{item.nombre}}</option>
+      </select>
+      <div *ngIf="diaCorte.errors?.['min'] && diaCorte.touched" class="contain-label-error">
+        <label class="label-error">Debes seleccionar un día de corte</label>
+      </div>
 
       <label for="fechaPago">Fecha pago:</label>
       <input type="date" id="fechaPago" placeholder="Fecha pago" formControlName="fechaPago" name="fechaPago"/>
+      <div *ngIf="fechaPago.errors?.['required'] && fechaPago.touched" class="contain-label-error">
+        <label class="label-error">La fecha de pago es requerida</label>
+      </div>
 
       <div *ngIf="errorStatus" class="contain-label-error">
         <label class="label-error">Ocurrió un error al registrar el préstamo: {{errorMsj}}</label>
