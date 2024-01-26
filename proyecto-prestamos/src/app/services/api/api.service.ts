@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse  } from "@angular/common/http";
 import { Observable, throwError, catchError } from "rxjs";
 import { UsuarioI } from "src/app/Models/UsuarioI";
 import { ClienteI } from "src/app/Models/ClienteI";
+import { PrestamoI } from "src/app/Models/PrestamoI";
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,18 @@ export class ApiService{
       catchError(this.handleError)
     );
   }
+  //#endregion
+
+  //#region Préstamo
+  registrarPrestamo(form : PrestamoI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Prestamo/Guardar";
+
+    return this.http.post<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   //#endregion
 
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {

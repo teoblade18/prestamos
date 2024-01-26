@@ -6,6 +6,7 @@ import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ClienteI } from '../Models/ClienteI';
 import { timeController } from '../util/timeController';
+import { PrestamoI } from '../Models/PrestamoI';
 
 @Component({
   selector: 'app-crear-prestamo',
@@ -16,6 +17,7 @@ export class CrearPrestamoComponent {
 
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {}
 
+  //#region variables
   get cliente(){
     return this.formPrestamo.get('cliente') as FormControl;
   }
@@ -28,8 +30,8 @@ export class CrearPrestamoComponent {
     return this.formPrestamo.get('montoInicial') as FormControl;
   }
 
-  get tipoInteres() {
-    return this.formPrestamo.get('tipoInteres') as FormControl;
+  get tipoIntereses() {
+    return this.formPrestamo.get('tipoIntereses') as FormControl;
   }
 
   get porcentajeInteres() {
@@ -43,6 +45,7 @@ export class CrearPrestamoComponent {
   get fechaPago() {
     return this.formPrestamo.get('fechaPago') as FormControl;
   }
+  //#endregion
 
   oTime = new timeController();
   fechaHoy : string = this.oTime.obtenerFechaHoy();
@@ -51,13 +54,15 @@ export class CrearPrestamoComponent {
     cliente: [0, [Validators.required, Validators.min(1)]],
     fechaInicial: [this.fechaHoy , [Validators.required]],
     montoInicial: ['', [Validators.required, Validators.min(1)]],
-    tipoInteres: [0, [Validators.required,  Validators.min(1)]],
+    tipoIntereses: [0, [Validators.required,  Validators.min(1)]],
     porcentajeInteres: [5, [Validators.required,  Validators.min(1)]],
     diaCorte: [0, [Validators.required,  Validators.min(1)]],
     fechaPago: ['', [Validators.required]]
   });
 
   @Input() dataEntrante : any;
+  prestamo : any = {}
+
   clientes : ClienteI[] = [];
   tiposInteres : string[] = ['Compuesto', 'Fijo']
   diasCorte : any[] = [{id: 1, nombre:'Primero'},{id:2, nombre:'Quincena'},{id: 3, nombre:'Cada quince días'}]
@@ -66,15 +71,16 @@ export class CrearPrestamoComponent {
   errorMsj: string = '';
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaObject: any;
 
   ngOnInit(): void {
     if (this.oPrestamistaString == null){
       this.cerrarSesion();
     }
     else{
-      let oPrestamistaObject: PrestamistaI = JSON.parse(this.oPrestamistaString);
+      this.oPrestamistaObject = JSON.parse(this.oPrestamistaString) as PrestamistaI;
 
-      this.api.consultarClientes(oPrestamistaObject.idPrestamista).subscribe(
+      this.api.consultarClientes(this.oPrestamistaObject.idPrestamista).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
           if (dataResponse.mensaje == 'ok') {
@@ -101,6 +107,33 @@ export class CrearPrestamoComponent {
 
   registrarPrestamo(){
 
+    this.prestamo = {
+      idPrestamo: 0,
+      idCliente : this.cliente.value,
+      idPrestamista : this.oPrestamistaObject.idPrestamista,
+      fechaInicial: this.fechaInicial.value,
+      porcentaje: this.porcentajeInteres.value,
+      tipoIntereses: this.tipoIntereses.value,
+      diaCorte : this.diaCorte.value,
+      montoInicial : this.montoInicial.value,
+      montoReal: this.montoInicial.value,
+      fechaPago: this.fechaPago.value
+    }
+
+    this.api.registrarPrestamo(this.prestamo).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        if (dataResponse.mensaje == 'ok') {
+          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
+          console.log(jsonResponse);
+        }
+      },
+
+      (error) => {
+        this.errorStatus = true;
+        this.errorMsj =  error.mensaje;
+      }
+    );
   }
 
 }

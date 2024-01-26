@@ -1,6 +1,6 @@
 <main>
   <section>
-    <form [formGroup]="formPrestamo">
+    <form [formGroup]="formPrestamo" (ngSubmit)="registrarPrestamo()">
       <h1 *ngIf="dataEntrante == null">Registrar Préstamo</h1>
       <h1 *ngIf="dataEntrante != null">Editar Préstamo</h1>
 
@@ -28,12 +28,12 @@
         <label class="label-error">El monto inicial debe ser positivo</label>
       </div>
 
-      <label for="tipoInteres">Tipo de interés:</label>
-      <select name="tipoInteres" id="tipoInteres" formControlName="tipoInteres">
+      <label for="tipoIntereses">Tipo de interés:</label>
+      <select name="tipoIntereses" id="tipoIntereses" formControlName="tipoIntereses">
         <option value="0">Seleccionar tipo de interés...</option>
         <option *ngFor="let item of tiposInteres" [value]="item">{{item}}</option>
       </select>
-      <div *ngIf="tipoInteres.errors?.['min'] && tipoInteres.touched" class="contain-label-error">
+      <div *ngIf="tipoIntereses.errors?.['min'] && tipoIntereses.touched" class="contain-label-error">
         <label class="label-error">Debes seleccionar un tipo de interés</label>
       </div>
 
