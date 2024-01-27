@@ -29,8 +29,7 @@
       </div>
 
       <label for="tipoIntereses">Tipo de interés:</label>
-      <select name="tipoIntereses" id="tipoIntereses" formControlName="tipoIntereses">
-        <option value="0">Seleccionar tipo de interés...</option>
+      <select name="tipoIntereses" id="tipoIntereses" formControlName="tipoIntereses" [value]="1">
         <option *ngFor="let item of tiposInteres" [value]="item">{{item}}</option>
       </select>
       <div *ngIf="tipoIntereses.errors?.['min'] && tipoIntereses.touched" class="contain-label-error">
@@ -65,7 +64,7 @@
         <label class="label-error">Ocurrió un error al registrar el préstamo: {{errorMsj}}</label>
       </div>
 
-      <button  type="submit" [disabled]="formPrestamo.invalid">Ingresar</button>
+      <button *ngIf="dataEntrante == null" type="submit" [disabled]="formPrestamo.invalid">Ingresar</button>
       <button *ngIf="dataEntrante != null" type="submit" [disabled]="formPrestamo.invalid">Editar</button>
 
     </form>

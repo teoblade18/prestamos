@@ -10,7 +10,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
-import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component'
+import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
+import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.componen
     MenuComponent,
     CrearClienteComponent,
     ConsultaClientesComponent,
-    CrearPrestamoComponent
+    CrearPrestamoComponent,
+    ConsultarPrestamosComponent
   ],
   imports: [
     BrowserModule,

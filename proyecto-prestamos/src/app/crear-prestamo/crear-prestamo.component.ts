@@ -54,7 +54,7 @@ export class CrearPrestamoComponent {
     cliente: [0, [Validators.required, Validators.min(1)]],
     fechaInicial: [this.fechaHoy , [Validators.required]],
     montoInicial: ['', [Validators.required, Validators.min(1)]],
-    tipoIntereses: [0, [Validators.required,  Validators.min(1)]],
+    tipoIntereses: ['Compuesto', [Validators.required,  Validators.min(1)]],
     porcentajeInteres: [5, [Validators.required,  Validators.min(1)]],
     diaCorte: [0, [Validators.required,  Validators.min(1)]],
     fechaPago: ['', [Validators.required]]
