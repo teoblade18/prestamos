@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultar clientes</title>
+  <title>Consultar Prestamos</title>
 </head>
 <body>
   <main>
@@ -13,5 +13,31 @@
     <a routerLink="/crear-prestamo">Nuevo Préstamo</a>
 
     <br><br>
+
+    <section *ngFor="let prestamo of (prestamos)" class="cliente-box">
+      <!-- <div *ngIf="cliente.idCliente == clienteEditando">
+        <app-crear-cliente (edicionFinalizada)="finalizarEdicion($event)" [dataEntrante]="cliente"></app-crear-cliente>
+      </div> -->
+        <div class="header">
+          <h2>{{prestamo.idPrestamo}} - {{ prestamo.oCliente.nombre }}</h2>
+          <div class="botones-header">
+            <!-- <div>
+              <button class="editar-btn" (click)="editarCliente(cliente.idCliente)"><img src="./../../assets/imgs/edit.png" alt="editar"></button>
+            </div>
+            <div>
+              <button class="eliminar-btn" (click)="eliminarCliente(cliente.idCliente)"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button>
+            </div> -->
+          </div>
+        </div>
+        <div class="info">
+          <label><strong>Fecha inicial: </strong>{{ prestamo.fechaInicial }}</label>
+          <label><strong>Monto inicial: </strong>{{ prestamo.montoInicial }}</label>
+          <label><strong>Monto real: </strong>{{ prestamo.montoReal }}</label>
+          <label><strong>Día corte: </strong>{{ prestamo.diaCorte }}</label>
+          <label><strong>Porcentaje interés: </strong>{{ prestamo.porcentaje }}</label>
+          <label><strong>Tipo interés: </strong>{{ prestamo.tipoIntereses }}</label>
+          <label><strong>Fecha pago estimado: </strong>{{ prestamo.fechaPago }}</label>
+        </div>
+    </section>
   </main>
 </body>

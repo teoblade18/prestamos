@@ -1,3 +1,5 @@
+import { ClienteI } from "./ClienteI";
+
 export interface PrestamoI{
   idPrestamo: number,
   idCliente : number,
@@ -8,5 +10,6 @@ export interface PrestamoI{
   diaCorte : number,
   montoInicial : number,
   montoReal: number,
-  fechaPago: string
+  fechaPago: string,
+  oCliente: ClienteI
 }

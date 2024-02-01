@@ -93,6 +93,14 @@ export class ApiService{
     );
   }
 
+  consultarPrestamosXPrestamista(idPrestamista : number): Observable<ResponseI>{
+    let direccion = this.url + `api/Prestamo/ConsultarPrestamosXPrestamista/${idPrestamista}`;
+
+    return this.http.get<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   //#endregion
 
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {
