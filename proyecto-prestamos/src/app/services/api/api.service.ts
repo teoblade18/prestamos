@@ -84,6 +84,15 @@ export class ApiService{
     );
   }
 
+  ConsultarNumeroPrestamosXCliente(idCliente : number): Observable<ResponseI>{
+
+    let direccion = this.url + `api/Prestamo/ConsultarNumeroPrestamosXCliente/${idCliente}`;
+
+    return this.http.get<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   //#endregion
 
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {

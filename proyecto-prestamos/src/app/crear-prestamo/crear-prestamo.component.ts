@@ -72,6 +72,7 @@ export class CrearPrestamoComponent {
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
   oPrestamistaObject: any;
+  numeroPrestamosXCliente: number = 0;
 
   ngOnInit(): void {
     if (this.oPrestamistaString == null){
@@ -120,12 +121,42 @@ export class CrearPrestamoComponent {
       fechaPago: this.fechaPago.value
     }
 
-    this.api.registrarPrestamo(this.prestamo).subscribe(
+    this.api.ConsultarNumeroPrestamosXCliente(this.prestamo.idCliente).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
         if (dataResponse.mensaje == 'ok') {
-          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
-          console.log(jsonResponse);
+          this.numeroPrestamosXCliente = parseInt(dataResponse.response);
+
+          if(this.numeroPrestamosXCliente > 0){
+
+            if(confirm("Este cliente tiene ya un préstamo registrado ¿Desea continuar?")){
+
+              if(this.oPrestamistaObject.capital >= this.montoInicial.value){
+                this.api.registrarPrestamo(this.prestamo).subscribe(
+                  (data) => {
+                    let dataResponse: ResponseI = data;
+                    if (dataResponse.mensaje == 'ok') {
+                      this.oPrestamistaObject.capital -= this.montoInicial.value;
+
+                      this.oPrestamistaString = JSON.stringify(this.oPrestamistaObject); // Convertir a JSON
+                      localStorage.setItem('oPrestamista', this.oPrestamistaString);
+
+                      this.router.navigate(['/consultar-prestamos']);
+                    }
+                  },
+
+                  (error) => {
+                    this.errorStatus = true;
+                    this.errorMsj =  error.mensaje;
+                  }
+                );
+              }
+              else{
+                this.errorStatus = true;
+                this.errorMsj = "No tiene capital suficiente para crear el préstamo";
+              }
+            }
+          }
         }
       },
 
