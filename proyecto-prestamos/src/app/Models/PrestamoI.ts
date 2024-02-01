@@ -1,3 +1,7 @@
+import { AbonoI } from "./AbonoI";
+import { ClienteI } from "./ClienteI";
+import { InteresI } from "./InteresI";
+
 export interface PrestamoI{
   idPrestamo: number,
   idCliente : number,
@@ -8,5 +12,8 @@ export interface PrestamoI{
   diaCorte : number,
   montoInicial : number,
   montoReal: number,
-  fechaPago: string
+  fechaPago: string,
+  oCliente: ClienteI
+  abonos: AbonoI[]
+  intereses: InteresI[]
 }
