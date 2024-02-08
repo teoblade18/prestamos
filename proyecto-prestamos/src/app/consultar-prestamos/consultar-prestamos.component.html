@@ -14,7 +14,11 @@
 
     <br><br>
 
+<<<<<<< HEAD
     <section *ngFor="let prestamo of (prestamos)" class="prestamo-box">
+=======
+    <section *ngFor="let prestamo of (prestamos)" class="cliente-box">
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
       <!-- <div *ngIf="cliente.idCliente == clienteEditando">
         <app-crear-cliente (edicionFinalizada)="finalizarEdicion($event)" [dataEntrante]="cliente"></app-crear-cliente>
       </div> -->
@@ -38,6 +42,7 @@
           <label><strong>Tipo interés: </strong>{{ prestamo.tipoIntereses }}</label>
           <label><strong>Fecha pago estimado: </strong>{{ prestamo.fechaPago }}</label>
         </div>
+<<<<<<< HEAD
 
         <div class="container-botones-secundarios" (click)="mostrarInfoExtra(prestamo.idPrestamo)">
           <span *ngIf="prestamo.idPrestamo == idPrestamoDesplegado" id="botonOcultar" class="boton-ocultar">-</span>
@@ -68,6 +73,8 @@
           <button>Añadir abono</button>
         </div>
 
+=======
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
     </section>
   </main>
 </body>

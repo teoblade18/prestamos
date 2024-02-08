@@ -14,7 +14,11 @@ h1, h2, h3 {
   color: #3A4D39;
 }
 
+<<<<<<< HEAD
 .prestamo-box {
+=======
+.cliente-box {
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -53,14 +57,22 @@ h1, h2, h3 {
 }
 
 .eliminar-btn {
+<<<<<<< HEAD
+=======
+  background-color: #ac7878;
+  color: #fff;
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: auto;
+<<<<<<< HEAD
   margin: 0px;
   padding: 0px;
   background-color: transparent;
   color: transparent;
+=======
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 }
 
 .eliminar-btn img{
@@ -69,10 +81,13 @@ h1, h2, h3 {
 }
 
 .eliminar-btn:hover {
+<<<<<<< HEAD
   background-color: #ac7878;
 }
 
 .eliminar-btn:active{
+=======
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
   background-color: #583e3e;
 }
 
@@ -92,6 +107,7 @@ h1, h2, h3 {
 
 label {
   display: block;
+<<<<<<< HEAD
   color: #3A4D39;
 }
 
@@ -142,3 +158,8 @@ label {
   gap: 10px;
 }
 
+=======
+  margin-bottom: 10px;
+  color: #3A4D39;
+}
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
