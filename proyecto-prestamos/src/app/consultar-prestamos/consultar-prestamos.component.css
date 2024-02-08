@@ -14,7 +14,7 @@ h1, h2, h3 {
   color: #3A4D39;
 }
 
-.cliente-box {
+.prestamo-box {
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -53,12 +53,14 @@ h1, h2, h3 {
 }
 
 .eliminar-btn {
-  background-color: #ac7878;
-  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: auto;
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  color: transparent;
 }
 
 .eliminar-btn img{
@@ -67,6 +69,10 @@ h1, h2, h3 {
 }
 
 .eliminar-btn:hover {
+  background-color: #ac7878;
+}
+
+.eliminar-btn:active{
   background-color: #583e3e;
 }
 
@@ -86,6 +92,53 @@ h1, h2, h3 {
 
 label {
   display: block;
-  margin-bottom: 10px;
   color: #3A4D39;
 }
+
+.container-botones-secundarios{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 6px 15px;
+  border-bottom: 0.5px solid #3A4D39;
+  cursor: pointer;
+}
+
+.container-botones-secundarios h3 {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+}
+
+.container-info-secundarios{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+}
+
+.container-info-secundarios div{
+  width: 100%;
+}
+
+.intereses label{
+  color: rgb(219, 27, 27);
+}
+
+.boton-ocultar{
+  padding: 0;
+  margin: 0;
+  width: auto;
+  color: #3A4D39;
+}
+
+.container-botones-terciarios{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 6px 15px;
+  gap: 10px;
+}
+

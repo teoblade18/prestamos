@@ -1,4 +1,6 @@
+import { AbonoI } from "./AbonoI";
 import { ClienteI } from "./ClienteI";
+import { InteresI } from "./InteresI";
 
 export interface PrestamoI{
   idPrestamo: number,
@@ -11,5 +13,7 @@ export interface PrestamoI{
   montoInicial : number,
   montoReal: number,
   fechaPago: string,
-  oCliente: ClienteI
+  oCliente: ClienteI,
+  intereses : InteresI[],
+  abonos: AbonoI[]
 }

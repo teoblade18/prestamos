@@ -22,6 +22,7 @@ export class ConsultarPrestamosComponent {
   errorStatus: boolean = false;
   errorMsj: string = "";
 
+  idPrestamoDesplegado: number = 0;
 
   ngOnInit() : void{
     if (this.oPrestamistaString == null){
@@ -34,8 +35,8 @@ export class ConsultarPrestamosComponent {
         (data)=>{
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {
-            let prestamsString = JSON.stringify(dataResponse.response)
-            this.prestamos = JSON.parse(prestamsString);
+            let prestamosString = JSON.stringify(dataResponse.response)
+            this.prestamos = JSON.parse(prestamosString);
           }
           else{
             this.errorStatus = true;
@@ -49,5 +50,14 @@ export class ConsultarPrestamosComponent {
   cerrarSesion(){
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  mostrarInfoExtra(idPrestamo : number){
+    if(idPrestamo != this.idPrestamoDesplegado){
+      this.idPrestamoDesplegado = idPrestamo;
+    }
+    else{
+      this.idPrestamoDesplegado = 0;
+    }
   }
 }
