@@ -14,15 +14,7 @@
 
     <br><br>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <section *ngFor="let prestamo of (prestamos)" class="prestamo-box">
-=======
     <section *ngFor="let prestamo of (prestamos)" class="cliente-box">
->>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
-=======
-    <section *ngFor="let prestamo of (prestamos)" class="cliente-box">
->>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
       <!-- <div *ngIf="cliente.idCliente == clienteEditando">
         <app-crear-cliente (edicionFinalizada)="finalizarEdicion($event)" [dataEntrante]="cliente"></app-crear-cliente>
       </div> -->
@@ -46,42 +38,6 @@
           <label><strong>Tipo interés: </strong>{{ prestamo.tipoIntereses }}</label>
           <label><strong>Fecha pago estimado: </strong>{{ prestamo.fechaPago }}</label>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        <div class="container-botones-secundarios" (click)="mostrarInfoExtra(prestamo.idPrestamo)">
-          <span *ngIf="prestamo.idPrestamo == idPrestamoDesplegado" id="botonOcultar" class="boton-ocultar">-</span>
-          <span *ngIf="prestamo.idPrestamo != idPrestamoDesplegado" id="botonOcultar" class="boton-ocultar">+</span>
-          <h3 *ngIf="prestamo.idPrestamo == idPrestamoDesplegado" for="botonOcultar">Abonos</h3>
-          <h3 *ngIf="prestamo.idPrestamo == idPrestamoDesplegado" for="botonOcultar">Intereses</h3>
-        </div>
-
-
-
-        <div class="container-info-secundarios" *ngIf="prestamo.idPrestamo == idPrestamoDesplegado">
-
-          <div class="info">
-            <div class="abonos" *ngFor="let abono of (prestamo.abonos)">
-              <label><strong>{{abono.fecha}}: </strong>{{ abono.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button></label>
-            </div>
-
-          </div>
-          <div class="info">
-            <div class="intereses" *ngFor="let interes of (prestamo.intereses)">
-              <label><strong>{{interes.fecha}}: </strong>{{ interes.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="container-botones-terciarios" *ngIf="prestamo.idPrestamo == idPrestamoDesplegado">
-          <button>Añadir interes</button>
-          <button>Añadir abono</button>
-        </div>
-
-=======
->>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
-=======
->>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
     </section>
   </main>
 </body>
