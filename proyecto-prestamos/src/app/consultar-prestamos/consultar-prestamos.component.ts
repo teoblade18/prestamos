@@ -23,7 +23,10 @@ export class ConsultarPrestamosComponent {
   errorMsj: string = "";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   idPrestamoDesplegado: number = 0;
+=======
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 =======
 >>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 
@@ -39,8 +42,13 @@ export class ConsultarPrestamosComponent {
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {
 <<<<<<< HEAD
+<<<<<<< HEAD
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
+=======
+            let prestamsString = JSON.stringify(dataResponse.response)
+            this.prestamos = JSON.parse(prestamsString);
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 =======
             let prestamsString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamsString);
@@ -60,6 +68,7 @@ export class ConsultarPrestamosComponent {
     this.router.navigate(['/home']);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   mostrarInfoExtra(idPrestamo : number){
     if(idPrestamo != this.idPrestamoDesplegado){
@@ -69,6 +78,8 @@ export class ConsultarPrestamosComponent {
       this.idPrestamoDesplegado = 0;
     }
   }
+=======
+>>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 =======
 >>>>>>> acb2fe6c3ab67329e292555ef59495c0014504b6
 }
