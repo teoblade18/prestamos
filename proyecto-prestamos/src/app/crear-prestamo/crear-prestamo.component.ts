@@ -157,6 +157,33 @@ export class CrearPrestamoComponent {
               }
             }
           }
+
+          else{
+            if(this.oPrestamistaObject.capital >= this.montoInicial.value){
+              this.api.registrarPrestamo(this.prestamo).subscribe(
+                (data) => {
+                  let dataResponse: ResponseI = data;
+                  if (dataResponse.mensaje == 'ok') {
+                    this.oPrestamistaObject.capital -= this.montoInicial.value;
+
+                    this.oPrestamistaString = JSON.stringify(this.oPrestamistaObject); // Convertir a JSON
+                    localStorage.setItem('oPrestamista', this.oPrestamistaString);
+
+                    this.router.navigate(['/consultar-prestamos']);
+                  }
+                },
+
+                (error) => {
+                  this.errorStatus = true;
+                  this.errorMsj =  error.mensaje;
+                }
+              );
+            }
+            else{
+              this.errorStatus = true;
+              this.errorMsj = "No tiene capital suficiente para crear el préstamo";
+            }
+          }
         }
       },
 

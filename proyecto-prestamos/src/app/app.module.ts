@@ -11,7 +11,8 @@ import { MenuComponent } from './menu/menu.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
 import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
-import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component'
+import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
+import { CrearAbonoComponent } from './crear-abono/crear-abono.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-pre
     CrearClienteComponent,
     ConsultaClientesComponent,
     CrearPrestamoComponent,
-    ConsultarPrestamosComponent
+    ConsultarPrestamosComponent,
+    CrearAbonoComponent
   ],
   imports: [
     BrowserModule,

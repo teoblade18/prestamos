@@ -8,6 +8,7 @@ import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
 import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
 import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
+import { CrearAbonoComponent } from './crear-abono/crear-abono.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'consultar-clientes', component: ConsultaClientesComponent},
   {path: 'crear-prestamo', component: CrearPrestamoComponent},
   {path: 'consultar-prestamos', component: ConsultarPrestamosComponent},
+  {path: 'crear-abono', component: CrearAbonoComponent},
   {path: '**', component: UsuarioComponent}
 ];
 
