@@ -6,6 +6,7 @@ import { Observable, throwError, catchError } from "rxjs";
 import { UsuarioI } from "src/app/Models/UsuarioI";
 import { ClienteI } from "src/app/Models/ClienteI";
 import { PrestamoI } from "src/app/Models/PrestamoI";
+import { AbonoI } from "src/app/Models/AbonoI";
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,7 @@ export class ApiService{
   //#endregion
 
   //#region Préstamo
+
   registrarPrestamo(form : PrestamoI): Observable<ResponseI>{
 
     let direccion = this.url + "api/Prestamo/Guardar";
@@ -97,6 +99,28 @@ export class ApiService{
     let direccion = this.url + `api/Prestamo/ConsultarPrestamosXPrestamista/${idPrestamista}`;
 
     return this.http.get<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //#endregion
+
+  //#region Abono
+
+  registrarAbono(form : AbonoI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Abono/Guardar";
+
+    return this.http.post<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  eliminarAbono(idAbono : number): Observable<ResponseI>{
+
+    let direccion = this.url + `api/Abono/Eliminar/${idAbono}`;
+
+    return this.http.delete<ResponseI>(direccion).pipe(
       catchError(this.handleError)
     );
   }

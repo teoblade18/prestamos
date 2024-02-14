@@ -60,4 +60,21 @@ export class ConsultarPrestamosComponent {
       this.idPrestamoDesplegado = 0;
     }
   }
+
+  eliminarAbono(idAbono: number){
+    if(confirm('¿Estás seguro de eliminar este abono?')){
+      this.api.eliminarAbono(idAbono).subscribe(
+        (data)=>{
+          let dataResponse: ResponseI = data
+          if (dataResponse.mensaje == 'ok') {
+            console.log('Abono eliminado');
+          }
+          else{
+            this.errorStatus = true;
+            this.errorMsj =  "No se encontraron abonos con este id.";
+          }
+        }
+      );
+    }
+  }
 }

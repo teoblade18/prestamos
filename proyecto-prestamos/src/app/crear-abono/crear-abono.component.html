@@ -1,16 +1,29 @@
 
 <main>
   <section>
-    <form>
+    <form [formGroup]="formAbono" (ngSubmit)="registrarAbono()">
       <h1>Agregar Abono</h1>
 
       <label for="fecha">Fecha:</label>
       <input type="date" id="fecha" placeholder="Fecha" formControlName="fecha" name="fecha"/>
+      <div *ngIf="fecha.errors?.['required'] && fecha.touched" class="contain-label-error">
+        <label class="label-error">La fecha es requerida</label>
+      </div>
 
       <label for="valor">Valor:</label>
       <input type="number" id="valor" placeholder="Valor" formControlName="valor" name="valor"/>
+      <div *ngIf="valor.errors?.['required'] && valor.touched" class="contain-label-error">
+        <label class="label-error">El valor es requerido</label>
+      </div>
+      <div *ngIf="valor.errors?.['min'] && valor.touched" class="contain-label-error">
+        <label class="label-error">El valor debe ser positivo</label>
+      </div>
 
-      <button type="submit">Ingresar</button>
+      <div *ngIf="errorStatus" class="contain-label-error">
+        <label class="label-error">Ocurrió un error al registrar el préstamo: {{errorMsj}}</label>
+      </div>
+
+      <button type="submit" [disabled]="formAbono.invalid">Ingresar</button>
 
     </form>
   </section>

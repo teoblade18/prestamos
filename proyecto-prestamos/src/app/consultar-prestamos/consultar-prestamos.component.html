@@ -50,7 +50,7 @@
 
           <div class="info">
             <div class="abonos" *ngFor="let abono of (prestamo.abonos)">
-              <label><strong>{{abono.fecha}}: </strong>{{ abono.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button></label>
+              <label><strong>{{abono.fecha}}: </strong>{{ abono.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar" (click)="eliminarAbono(abono.idAbono)"></button></label>
             </div>
 
           </div>
