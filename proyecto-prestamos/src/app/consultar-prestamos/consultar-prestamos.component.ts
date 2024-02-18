@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { PrestamistaI } from '../Models/PrestamistaI';
 import { PrestamoI } from '../Models/PrestamoI';
 import { ResponseI } from '../Models/Response.interface';
+import { CrearAbonoComponent } from '../crear-abono/crear-abono.component';
+import { AbonoI } from '../Models/AbonoI';
 
 @Component({
   selector: 'app-consultar-prestamos',
@@ -61,17 +63,55 @@ export class ConsultarPrestamosComponent {
     }
   }
 
+  modalAbonoAbierto : boolean = false;
+
+  abrirModalAbono(){
+    this.modalAbonoAbierto = true;
+  }
+
+  cerrarModalAbono(abono : AbonoI){
+    this.modalAbonoAbierto = false;
+
+    if(abono != null){
+      this.recalcularPrestamos();
+    }
+  }
+
   eliminarAbono(idAbono: number){
+
     if(confirm('¿Estás seguro de eliminar este abono?')){
       this.api.eliminarAbono(idAbono).subscribe(
         (data)=>{
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {
-            console.log('Abono eliminado');
+            this.recalcularPrestamos();
           }
           else{
             this.errorStatus = true;
             this.errorMsj =  "No se encontraron abonos con este id.";
+          }
+        }
+      );
+    }
+  }
+
+  recalcularPrestamos(){
+    if (this.oPrestamistaString == null){
+      this.cerrarSesion();
+    }
+    else{
+      let oPrestamistaObject : PrestamistaI = JSON.parse(this.oPrestamistaString);
+
+      this.api.consultarPrestamosXPrestamista(oPrestamistaObject.idPrestamista).subscribe(
+        (data)=>{
+          let dataResponse: ResponseI = data
+          if (dataResponse.mensaje == 'ok') {
+            let prestamosString = JSON.stringify(dataResponse.response)
+            this.prestamos = JSON.parse(prestamosString);
+          }
+          else{
+            this.errorStatus = true;
+            this.errorMsj =  "No se encontraron prestamos para este prestamista.";
           }
         }
       );

@@ -62,10 +62,11 @@
         </div>
 
         <div class="container-botones-terciarios" *ngIf="prestamo.idPrestamo == idPrestamoDesplegado">
-          <button>Añadir abono</button>
+          <button (click)="abrirModalAbono()">Añadir abono</button>
           <button>Añadir interes</button>
         </div>
-
     </section>
+
+    <app-crear-abono *ngIf="modalAbonoAbierto" [dataEntrante]="idPrestamoDesplegado" (crearAbonoFinalizado)="cerrarModalAbono($event)"></app-crear-abono>
   </main>
 </body>

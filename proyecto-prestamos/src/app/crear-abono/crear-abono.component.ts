@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder,FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
 import { timeController } from '../util/timeController';
 import { AbonoI } from '../Models/AbonoI';
+import { ResponseI } from '../Models/Response.interface';
 
 @Component({
   selector: 'app-crear-abono',
@@ -23,8 +24,10 @@ export class CrearAbonoComponent {
   }
   //#endregion
 
+  @Input() dataEntrante: any;
   oTime = new timeController();
   fechaHoy : string = this.oTime.obtenerFechaHoy();
+  @Output() crearAbonoFinalizado = new EventEmitter<AbonoI>();
 
   formAbono = this.fb.group({
     fecha : [this.fechaHoy , [Validators.required]],
@@ -41,14 +44,38 @@ export class CrearAbonoComponent {
   errorStatus: boolean = false;
   errorMsj: string = '';
 
+  ngOnInit(): void {
+    if(this.dataEntrante == null){
+      this.router.navigate(['/consultar-prestamos']);
+    }
+  }
+
   registrarAbono(){
     this.abono = {
       idAbono: 0,
       fecha: this.fecha.value,
       valor: this.valor.value,
-      idPrestamo: 0
+      idPrestamo: this.dataEntrante
     }
 
-    console.log(this.abono);
+    this.api.registrarAbono(this.abono).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        if (dataResponse.mensaje == 'ok') {
+          this.formAbono.reset();
+          this.crearAbonoFinalizado.emit(this.abono);
+        }
+      },
+
+      (error) => {
+        this.errorStatus = true;
+        this.errorMsj =  error.mensaje;
+      }
+    );
+  }
+
+  cerrarModal(){
+    this.formAbono.reset();
+    this.crearAbonoFinalizado.emit();
   }
 }
