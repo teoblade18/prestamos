@@ -7,6 +7,7 @@ import { UsuarioI } from "src/app/Models/UsuarioI";
 import { ClienteI } from "src/app/Models/ClienteI";
 import { PrestamoI } from "src/app/Models/PrestamoI";
 import { AbonoI } from "src/app/Models/AbonoI";
+import { InteresI } from "src/app/Models/InteresI";
 
 @Injectable({
   providedIn: 'root'
@@ -126,6 +127,30 @@ export class ApiService{
   }
 
   //#endregion
+
+  //#region Interes
+
+  registrarInteres(form : InteresI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Interes/Guardar";
+
+    return this.http.post<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  eliminarInteres(idInteres : number): Observable<ResponseI>{
+
+    let direccion = this.url + `api/Interes/Eliminar/${idInteres}`;
+
+    return this.http.delete<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //#endregion
+
+
 
   private handleError(error: HttpErrorResponse): Observable<ResponseI> {
 

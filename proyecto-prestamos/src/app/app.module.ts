@@ -12,7 +12,8 @@ import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes.component';
 import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
 import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
-import { CrearAbonoComponent } from './crear-abono/crear-abono.component'
+import { CrearAbonoComponent } from './crear-abono/crear-abono.component';
+import { CrearInteresComponent } from './crear-interes/crear-interes.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CrearAbonoComponent } from './crear-abono/crear-abono.component'
     ConsultaClientesComponent,
     CrearPrestamoComponent,
     ConsultarPrestamosComponent,
-    CrearAbonoComponent
+    CrearAbonoComponent,
+    CrearInteresComponent
   ],
   imports: [
     BrowserModule,

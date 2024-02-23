@@ -6,6 +6,7 @@ import { PrestamoI } from '../Models/PrestamoI';
 import { ResponseI } from '../Models/Response.interface';
 import { CrearAbonoComponent } from '../crear-abono/crear-abono.component';
 import { AbonoI } from '../Models/AbonoI';
+import { InteresI } from '../Models/InteresI';
 
 @Component({
   selector: 'app-consultar-prestamos',
@@ -25,6 +26,7 @@ export class ConsultarPrestamosComponent {
   errorMsj: string = "";
 
   idPrestamoDesplegado: number = 0;
+  prestamoDesplegado: any;
 
   ngOnInit() : void{
     if (this.oPrestamistaString == null){
@@ -57,22 +59,38 @@ export class ConsultarPrestamosComponent {
   mostrarInfoExtra(idPrestamo : number){
     if(idPrestamo != this.idPrestamoDesplegado){
       this.idPrestamoDesplegado = idPrestamo;
+      this.prestamoDesplegado = this.prestamos.find(prestamo => prestamo.idPrestamo === this.idPrestamoDesplegado);
     }
     else{
       this.idPrestamoDesplegado = 0;
+      this.prestamoDesplegado = {}
     }
   }
 
   modalAbonoAbierto : boolean = false;
+  modalInteresAbierto : boolean = false;
 
   abrirModalAbono(){
     this.modalAbonoAbierto = true;
+  }
+
+  abrirModalInteres(){
+    console.log(this.prestamoDesplegado);
+    this.modalInteresAbierto = true;
   }
 
   cerrarModalAbono(abono : AbonoI){
     this.modalAbonoAbierto = false;
 
     if(abono != null){
+      this.recalcularPrestamos();
+    }
+  }
+
+  cerrarModalInteres(interes : InteresI){
+    this.modalInteresAbierto = false;
+
+    if(interes != null){
       this.recalcularPrestamos();
     }
   }
@@ -89,6 +107,24 @@ export class ConsultarPrestamosComponent {
           else{
             this.errorStatus = true;
             this.errorMsj =  "No se encontraron abonos con este id.";
+          }
+        }
+      );
+    }
+  }
+
+  eliminarInteres(idInteres: number){
+
+    if(confirm('¿Estás seguro de eliminar este interés?')){
+      this.api.eliminarInteres(idInteres).subscribe(
+        (data)=>{
+          let dataResponse: ResponseI = data
+          if (dataResponse.mensaje == 'ok') {
+            this.recalcularPrestamos();
+          }
+          else{
+            this.errorStatus = true;
+            this.errorMsj =  "No se encontraron intereses con este id.";
           }
         }
       );

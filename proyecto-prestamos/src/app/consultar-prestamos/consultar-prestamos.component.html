@@ -56,17 +56,19 @@
           </div>
           <div class="info">
             <div class="intereses" *ngFor="let interes of (prestamo.intereses)">
-              <label><strong>{{interes.fecha}}: </strong>{{ interes.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button></label>
+              <label><strong>{{interes.fecha}}: </strong>{{ interes.valor }}$ <button class="eliminar-btn"><img src="./../../assets/imgs/delete.png" alt="eliminar" (click)="eliminarInteres(interes.idInteres)"></button></label>
             </div>
           </div>
         </div>
 
         <div class="container-botones-terciarios" *ngIf="prestamo.idPrestamo == idPrestamoDesplegado">
           <button (click)="abrirModalAbono()">Añadir abono</button>
-          <button>Añadir interes</button>
+          <button (click)="abrirModalInteres()">Añadir interes</button>
         </div>
     </section>
 
     <app-crear-abono *ngIf="modalAbonoAbierto" [dataEntrante]="idPrestamoDesplegado" (crearAbonoFinalizado)="cerrarModalAbono($event)"></app-crear-abono>
+    <app-crear-interes *ngIf="modalInteresAbierto" [prestamo]="prestamoDesplegado" (crearInteresFinalizado)="cerrarModalInteres($event)"></app-crear-interes>
+
   </main>
 </body>
