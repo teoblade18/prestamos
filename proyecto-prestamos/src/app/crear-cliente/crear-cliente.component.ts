@@ -89,8 +89,6 @@ export class CrearClienteComponent {
       (data) => {
         let dataResponse: ResponseI = data;
         if (dataResponse.mensaje == 'Cliente registrado') {
-          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
-          localStorage.setItem('oPrestamista', jsonResponse);
           this.router.navigate(['/consultar-clientes']);
         }
       },

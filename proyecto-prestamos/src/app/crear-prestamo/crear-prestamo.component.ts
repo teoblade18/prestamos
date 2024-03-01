@@ -45,6 +45,10 @@ export class CrearPrestamoComponent {
   get fechaPago() {
     return this.formPrestamo.get('fechaPago') as FormControl;
   }
+
+  get fechaPrimerPago() {
+    return this.formPrestamo.get('fechaPrimerPago') as FormControl;
+  }
   //#endregion
 
   oTime = new timeController();
@@ -57,7 +61,8 @@ export class CrearPrestamoComponent {
     tipoIntereses: ['Compuesto', [Validators.required,  Validators.min(1)]],
     porcentajeInteres: [5, [Validators.required,  Validators.min(1)]],
     diaCorte: [0, [Validators.required,  Validators.min(1)]],
-    fechaPago: ['', [Validators.required]]
+    fechaPago: ['', [Validators.required]],
+    fechaPrimerPago: ['', [Validators.required]]
   });
 
   @Input() dataEntrante : any;
@@ -118,7 +123,8 @@ export class CrearPrestamoComponent {
       diaCorte : this.diaCorte.value,
       montoInicial : this.montoInicial.value,
       montoReal: this.montoInicial.value,
-      fechaPago: this.fechaPago.value
+      fechaPago: this.fechaPago.value,
+      fechaProximoPago: this.fechaPrimerPago.value
     }
 
     this.api.ConsultarNumeroPrestamosXCliente(this.prestamo.idCliente).subscribe(

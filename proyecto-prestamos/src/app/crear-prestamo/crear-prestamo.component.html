@@ -45,6 +45,18 @@
         <label class="label-error">El porcentaje de interés debe ser positivo</label>
       </div>
 
+      <label for="fechaPago">Fecha pago:</label>
+      <input type="date" id="fechaPago" placeholder="Fecha pago" formControlName="fechaPago" name="fechaPago"/>
+      <div *ngIf="fechaPago.errors?.['required'] && fechaPago.touched" class="contain-label-error">
+        <label class="label-error">La fecha de pago es requerida</label>
+      </div>
+
+      <label for="fechaPrimerPago">Fecha primer pago:</label>
+      <input type="date" id="fechaPrimerPago" placeholder="Fecha pago" formControlName="fechaPrimerPago" name="fechaPrimerPago"/>
+      <div *ngIf="fechaPrimerPago.errors?.['required'] && fechaPrimerPago.touched" class="contain-label-error">
+        <label class="label-error">La fecha del primer pago es requerida</label>
+      </div>
+
       <label for="diaCorte">Día de corte:</label>
       <select name="diaCorte" id="diaCorte" formControlName="diaCorte">
         <option value="0">Seleccionar día de corte...</option>
@@ -52,12 +64,6 @@
       </select>
       <div *ngIf="diaCorte.errors?.['min'] && diaCorte.touched" class="contain-label-error">
         <label class="label-error">Debes seleccionar un día de corte</label>
-      </div>
-
-      <label for="fechaPago">Fecha pago:</label>
-      <input type="date" id="fechaPago" placeholder="Fecha pago" formControlName="fechaPago" name="fechaPago"/>
-      <div *ngIf="fechaPago.errors?.['required'] && fechaPago.touched" class="contain-label-error">
-        <label class="label-error">La fecha de pago es requerida</label>
       </div>
 
       <div *ngIf="errorStatus" class="contain-label-error">
