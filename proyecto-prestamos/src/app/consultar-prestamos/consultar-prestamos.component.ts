@@ -7,6 +7,7 @@ import { ResponseI } from '../Models/Response.interface';
 import { CrearAbonoComponent } from '../crear-abono/crear-abono.component';
 import { AbonoI } from '../Models/AbonoI';
 import { InteresI } from '../Models/InteresI';
+import { timeController } from '../util/timeController';
 
 @Component({
   selector: 'app-consultar-prestamos',
@@ -27,6 +28,9 @@ export class ConsultarPrestamosComponent {
 
   idPrestamoDesplegado: number = 0;
   prestamoDesplegado: any;
+
+  oTime = new timeController();
+  fechaHoy : string = this.oTime.obtenerFechaHoy();
 
   ngOnInit() : void{
     if (this.oPrestamistaString == null){
@@ -57,6 +61,7 @@ export class ConsultarPrestamosComponent {
   }
 
   mostrarInfoExtra(idPrestamo : number){
+
     if(idPrestamo != this.idPrestamoDesplegado){
       this.idPrestamoDesplegado = idPrestamo;
       this.prestamoDesplegado = this.prestamos.find(prestamo => prestamo.idPrestamo === this.idPrestamoDesplegado);

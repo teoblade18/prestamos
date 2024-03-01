@@ -36,7 +36,7 @@
           <label><strong>Día corte: </strong>{{ prestamo.diaCorte }}</label>
           <label><strong>Porcentaje interés: </strong>{{ prestamo.porcentaje }}</label>
           <label><strong>Tipo interés: </strong>{{ prestamo.tipoIntereses }}</label>
-          <label><strong>Fecha pago estimado: </strong>{{ prestamo.fechaPago }}</label>
+          <label [ngClass]="{'fecha-pago-sobrepasada': prestamo.fechaPago < fechaHoy}"><strong>Fecha pago estimado: </strong>{{ prestamo.fechaPago }}</label>
         </div>
 
         <div class="container-botones-secundarios" (click)="mostrarInfoExtra(prestamo.idPrestamo)">
