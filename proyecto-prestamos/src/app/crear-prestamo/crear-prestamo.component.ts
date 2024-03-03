@@ -70,7 +70,7 @@ export class CrearPrestamoComponent {
 
   clientes : ClienteI[] = [];
   tiposInteres : string[] = ['Compuesto', 'Fijo']
-  diasCorte : any[] = [{id: 1, nombre:'Primero'},{id:2, nombre:'Quincena'},{id: 3, nombre:'Cada quince días'}]
+  diasCorte : any[] = [{id: 1, nombre:'Primero'},{id:2, nombre:'Quincena'}]
 
   errorStatus: boolean = false;
   errorMsj: string = '';
