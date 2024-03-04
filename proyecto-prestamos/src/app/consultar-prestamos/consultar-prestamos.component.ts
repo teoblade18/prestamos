@@ -45,6 +45,7 @@ export class ConsultarPrestamosComponent {
           if (dataResponse.mensaje == 'ok') {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
+            console.log(this.prestamos);
           }
           else{
             this.errorStatus = true;

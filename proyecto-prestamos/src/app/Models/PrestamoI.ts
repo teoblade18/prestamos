@@ -14,6 +14,7 @@ export interface PrestamoI{
   montoReal: number,
   fechaPago: string,
   fechaProximoPago: string,
+  estado: string,
   oCliente: ClienteI,
   intereses : InteresI[],
   abonos: AbonoI[]

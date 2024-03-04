@@ -21,6 +21,11 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
+.header-cobrar{
+  background-color: #ffff51 !important;
+  color: black !important;
+}
+
 .header {
   background-color: #4F6F52;
   padding: 2px 10px;
@@ -29,7 +34,12 @@ h1, h2, h3 {
   align-items: center;
 }
 
-.header h2 {
+.header-h2-cobrar{
+  color: black;
+  margin: 0px 5px;
+}
+
+.header-h2{
   color: #fff;
   margin: 0px 5px;
 }
@@ -145,4 +155,3 @@ label {
 .fecha-pago-sobrepasada{
   color: red;
 }
-
