@@ -15,18 +15,17 @@
     <br><br>
 
     <section *ngFor="let prestamo of (prestamos)" class="prestamo-box">
-      <!-- <div *ngIf="cliente.idCliente == clienteEditando">
-        <app-crear-cliente (edicionFinalizada)="finalizarEdicion($event)" [dataEntrante]="cliente"></app-crear-cliente>
-      </div> -->
+      <div *ngIf="prestamo.idPrestamo == prestamoEnEdicion">
+        <app-crear-prestamo [dataEntrante]="prestamo"></app-crear-prestamo>
+      </div>
+
+      <div *ngIf="prestamo.idPrestamo != prestamoEnEdicion">
         <div class="header" [ngClass]="{'header-cobrar': prestamo.estado == 'Impago'}">
           <h2 [ngClass]="{'header-h2-cobrar': prestamo.estado == 'Impago', 'header-h2': prestamo.estado != 'Impago'}">{{prestamo.idPrestamo}} - {{ prestamo.oCliente.nombre }}</h2>
           <div class="botones-header">
-            <!-- <div>
-              <button class="editar-btn" (click)="editarCliente(cliente.idCliente)"><img src="./../../assets/imgs/edit.png" alt="editar"></button>
-            </div>
             <div>
-              <button class="eliminar-btn" (click)="eliminarCliente(cliente.idCliente)"><img src="./../../assets/imgs/delete.png" alt="eliminar"></button>
-            </div> -->
+              <button class="editar-btn" (click)="editarPrestamo(prestamo)"><img src="./../../assets/imgs/edit.png" alt="editar"></button>
+            </div>
           </div>
         </div>
         <div class="info">
@@ -65,6 +64,7 @@
           <button (click)="abrirModalAbono()">Añadir abono</button>
           <button (click)="abrirModalInteres()">Añadir interes</button>
         </div>
+      </div>
     </section>
 
     <app-crear-abono *ngIf="modalAbonoAbierto" [dataEntrante]="idPrestamoDesplegado" (crearAbonoFinalizado)="cerrarModalAbono($event)"></app-crear-abono>

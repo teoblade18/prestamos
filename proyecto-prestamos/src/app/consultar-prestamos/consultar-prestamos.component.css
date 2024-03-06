@@ -45,7 +45,7 @@ h1, h2, h3 {
 }
 
 .editar-btn {
-  background-color: #79AC78;
+  background-color: rgba(252, 252, 252, 0.3);
   color: #fff;
   border: none;
   border-radius: 5px;

@@ -45,7 +45,6 @@ export class ConsultarPrestamosComponent {
           if (dataResponse.mensaje == 'ok') {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
-            console.log(this.prestamos);
           }
           else{
             this.errorStatus = true;
@@ -59,6 +58,13 @@ export class ConsultarPrestamosComponent {
   cerrarSesion(){
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  prestamoEnEdicion : number = 0;
+
+  editarPrestamo(prestamo : PrestamoI){
+    this.prestamoEnEdicion = prestamo.idPrestamo;
+    console.log(this.prestamoEnEdicion);
   }
 
   mostrarInfoExtra(idPrestamo : number){
@@ -81,7 +87,6 @@ export class ConsultarPrestamosComponent {
   }
 
   abrirModalInteres(){
-    console.log(this.prestamoDesplegado);
     this.modalInteresAbierto = true;
   }
 
