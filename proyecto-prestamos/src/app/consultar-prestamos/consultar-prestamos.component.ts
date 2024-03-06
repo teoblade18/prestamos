@@ -62,9 +62,10 @@ export class ConsultarPrestamosComponent {
 
   prestamoEnEdicion : number = 0;
 
-  editarPrestamo(prestamo : PrestamoI){
-    this.prestamoEnEdicion = prestamo.idPrestamo;
-    console.log(this.prestamoEnEdicion);
+  cancelarPrestamo(prestamo : PrestamoI){
+    if(confirm(`¿Estás seguro de cancelar el prestamo ${prestamo.idPrestamo}: ${prestamo.oCliente.nombre}`)){
+      console.log(prestamo);
+    }
   }
 
   mostrarInfoExtra(idPrestamo : number){
