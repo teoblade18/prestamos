@@ -104,6 +104,14 @@ export class ApiService{
     );
   }
 
+  cancelarPrestamo(prestamo : PrestamoI): Observable<ResponseI>{
+    let direccion = this.url + `api/Prestamo/Cancelar`;
+
+    return this.http.put<ResponseI>(direccion, prestamo).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   //#endregion
 
   //#region Abono

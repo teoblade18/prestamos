@@ -24,7 +24,7 @@
           <h2 [ngClass]="{'header-h2-cobrar': prestamo.estado == 'Impago', 'header-h2': prestamo.estado != 'Impago'}">{{prestamo.idPrestamo}} - {{ prestamo.oCliente.nombre }}</h2>
           <div class="botones-header">
             <div>
-              <button class="cancelar-btn" (click)="cancelarPrestamo(prestamo)"><img src="./../../assets/imgs/delete.png" alt="editar"></button>
+              <button class="editar-btn" (click)="cancelarPrestamo(prestamo)"><img src="./../../assets/imgs/delete.png" alt="editar"></button>
             </div>
           </div>
         </div>

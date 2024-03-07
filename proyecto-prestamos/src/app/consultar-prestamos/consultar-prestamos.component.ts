@@ -39,6 +39,8 @@ export class ConsultarPrestamosComponent {
     else{
       let oPrestamistaObject : PrestamistaI = JSON.parse(this.oPrestamistaString);
 
+      console.log(oPrestamistaObject);
+
       this.api.consultarPrestamosXPrestamista(oPrestamistaObject.idPrestamista).subscribe(
         (data)=>{
           let dataResponse: ResponseI = data
@@ -64,7 +66,18 @@ export class ConsultarPrestamosComponent {
 
   cancelarPrestamo(prestamo : PrestamoI){
     if(confirm(`¿Estás seguro de cancelar el prestamo ${prestamo.idPrestamo}: ${prestamo.oCliente.nombre}`)){
-      console.log(prestamo);
+      this.api.cancelarPrestamo(prestamo).subscribe(
+        (data)=>{
+          let dataResponse: ResponseI = data
+          if (dataResponse.mensaje == 'ok') {
+            this.recalcularPrestamos();
+          }
+          else{
+            this.errorStatus = true;
+            this.errorMsj =  "No se encontraron intereses con este id.";
+          }
+        }
+      )
     }
   }
 
