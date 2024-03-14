@@ -65,15 +65,31 @@ export class RegistrarPrestamistaComponent {
   errorMsj: string = '';
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
-  oPrestamistaObject: PrestamistaI = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
+  idPrestamista: any = this.oPrestamistaString ? this.oPrestamistaString : 0;
+
+  prestamistaConsultado : any;
 
   ngOnInit() : void{
     if (this.oPrestamistaString == null){
       this.cerrarSesion();
     }else{
-        this.nombre.setValue(this.oPrestamistaObject.nombre);
-        this.capital.setValue(this.oPrestamistaObject.capital);
-        this.numeroCuenta.setValue(this.oPrestamistaObject.numeroCuenta);
+      this.api.obtenerPrestamista(this.idPrestamista).subscribe(
+        (data) => {
+          let dataResponse: ResponseI = data;
+          this.prestamistaConsultado = dataResponse.response as any;
+
+          if (dataResponse.mensaje == 'ok') {
+            this.nombre.setValue(this.prestamistaConsultado.nombre);
+            this.capital.setValue(this.prestamistaConsultado.capital);
+            this.numeroCuenta.setValue(this.prestamistaConsultado.numeroCuenta);
+          }
+        },
+
+        (error) => {
+          this.errorStatus = true;
+          this.errorMsj =  error.mensaje;
+        }
+      );
     }
   }
 
@@ -114,17 +130,24 @@ export class RegistrarPrestamistaComponent {
   }
 
   editarPrestamista(){
-    this.prestamista = this.oPrestamistaObject;
+    console.log(this.prestamistaConsultado)
+
+    this.prestamista = this.prestamistaConsultado;
     this.prestamista.nombre = this.nombre.value;
     this.prestamista.numeroCuenta = this.numeroCuenta.value;
     this.prestamista.capital = this.capital.value;
+    this.prestamista.oUsuario = {
+      nombreUsuario : 'null',
+      email: 'null',
+      contraseña: 'null'
+    }
+
+    console.log(this.prestamista);
 
     this.api.editarPrestamista(this.prestamista).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
         if (dataResponse.mensaje == 'ok') {
-          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
-          localStorage.setItem('oPrestamista', jsonResponse);
           alert('Prestamista editado');
         }
       },

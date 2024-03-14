@@ -2,11 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators, FormControl} from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
-import { PrestamistaI } from '../Models/PrestamistaI';
 import { ResponseI } from '../Models/Response.interface';
 import { ClienteI } from '../Models/ClienteI';
 import { timeController } from '../util/timeController';
-import { PrestamoI } from '../Models/PrestamoI';
 
 @Component({
   selector: 'app-crear-prestamo',
@@ -76,7 +74,7 @@ export class CrearPrestamoComponent {
   errorMsj: string = '';
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
-  oPrestamistaObject: any;
+  idPrestamista: any;
   numeroPrestamosXCliente: number = 0;
 
   ngOnInit(): void {
@@ -84,9 +82,9 @@ export class CrearPrestamoComponent {
       this.cerrarSesion();
     }
     else{
-      this.oPrestamistaObject = JSON.parse(this.oPrestamistaString) as PrestamistaI;
+      this.idPrestamista = JSON.parse(this.oPrestamistaString) as any;
 
-      this.api.consultarClientes(this.oPrestamistaObject.idPrestamista).subscribe(
+      this.api.consultarClientes(this.idPrestamista).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
           if (dataResponse.mensaje == 'ok') {
@@ -116,7 +114,7 @@ export class CrearPrestamoComponent {
     this.prestamo = {
       idPrestamo: 0,
       idCliente : this.cliente.value,
-      idPrestamista : this.oPrestamistaObject.idPrestamista,
+      idPrestamista : this.idPrestamista,
       fechaInicial: this.fechaInicial.value,
       porcentaje: this.porcentajeInteres.value,
       tipoIntereses: this.tipoIntereses.value,
@@ -127,68 +125,52 @@ export class CrearPrestamoComponent {
       fechaProximoPago: this.fechaPrimerPago.value
     }
 
+    //Consulta si el prestamista tiene más prestamos a nombre del mismo cliente
     this.api.ConsultarNumeroPrestamosXCliente(this.prestamo.idCliente).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
         if (dataResponse.mensaje == 'ok') {
           this.numeroPrestamosXCliente = parseInt(dataResponse.response);
+          let respuestaVariosPrestamos : boolean = true;
 
           if(this.numeroPrestamosXCliente > 0){
-
-            if(confirm("Este cliente tiene ya un préstamo registrado ¿Desea continuar?")){
-
-              if(this.oPrestamistaObject.capital >= this.montoInicial.value){
-                this.api.registrarPrestamo(this.prestamo).subscribe(
-                  (data) => {
-                    let dataResponse: ResponseI = data;
-                    if (dataResponse.mensaje == 'ok') {
-                      this.oPrestamistaObject.capital -= this.montoInicial.value;
-
-                      this.oPrestamistaString = JSON.stringify(this.oPrestamistaObject); // Convertir a JSON
-                      localStorage.setItem('oPrestamista', this.oPrestamistaString);
-
-                      this.router.navigate(['/consultar-prestamos']);
-                    }
-                  },
-
-                  (error) => {
-                    this.errorStatus = true;
-                    this.errorMsj =  error.mensaje;
-                  }
-                );
-              }
-              else{
-                this.errorStatus = true;
-                this.errorMsj = "No tiene capital suficiente para crear el préstamo";
-              }
-            }
+            respuestaVariosPrestamos = confirm("Este cliente tiene ya un préstamo registrado ¿Desea continuar?");
           }
 
-          else{
-            if(this.oPrestamistaObject.capital >= this.montoInicial.value){
-              this.api.registrarPrestamo(this.prestamo).subscribe(
-                (data) => {
-                  let dataResponse: ResponseI = data;
-                  if (dataResponse.mensaje == 'ok') {
-                    this.oPrestamistaObject.capital -= this.montoInicial.value;
+          if(respuestaVariosPrestamos){
+            //Consulta el capital del prestamista, para ver si tiene dinero suficiente para prestar
+            this.api.consultarCapitalPrestamista(this.idPrestamista).subscribe(
+              (data) => {
+                let dataResponse: ResponseI = data;
+                if (dataResponse.mensaje == 'ok') {
+                  let capitalActual: number = dataResponse.response as any
 
-                    this.oPrestamistaString = JSON.stringify(this.oPrestamistaObject); // Convertir a JSON
-                    localStorage.setItem('oPrestamista', this.oPrestamistaString);
+                  if(capitalActual >= this.montoInicial.value){
+                    this.api.registrarPrestamo(this.prestamo).subscribe(
+                      (data) => {
+                        let dataResponse: ResponseI = data;
+                        if (dataResponse.mensaje == 'ok') {
+                          this.router.navigate(['/consultar-prestamos']);
+                        }
+                      },
 
-                    this.router.navigate(['/consultar-prestamos']);
+                      (error) => {
+                        this.errorStatus = true;
+                        this.errorMsj =  error.mensaje;
+                      }
+                    );
                   }
-                },
-
-                (error) => {
-                  this.errorStatus = true;
-                  this.errorMsj =  error.mensaje;
+                  else{
+                    this.errorStatus = true;
+                    this.errorMsj = "No tiene capital suficiente para crear el préstamo";
+                  }
                 }
-              );
-            }
-            else{
-              this.errorStatus = true;
-              this.errorMsj = "No tiene capital suficiente para crear el préstamo";
-            }
+              },
+              (error) => {
+                this.errorStatus = true;
+                this.errorMsj =  error.mensaje;
+              }
+            );
           }
         }
       },

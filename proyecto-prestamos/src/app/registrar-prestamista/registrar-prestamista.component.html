@@ -1,10 +1,10 @@
 <main>
   <section>
     <form [formGroup]="formPrestamista">
-      <h1 *ngIf="oPrestamistaObject == null">Registrar Prestamista</h1>
-      <h1 *ngIf="oPrestamistaObject">Cuenta Prestamista</h1>
+      <h1 *ngIf="idPrestamista == null">Registrar Prestamista</h1>
+      <h1 *ngIf="idPrestamista">Cuenta Prestamista</h1>
 
-      <div *ngIf="oPrestamistaObject == null">
+      <div *ngIf="idPrestamista == null">
         <label for="nombreUsuario">Usuario:</label>
         <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" formControlName="nombreUsuario"  name="nombreUsuario"/>
         <div *ngIf="nombreUsuario.errors?.['required'] && nombreUsuario.touched" class="contain-label-error">
@@ -31,7 +31,7 @@
       </div>
 
 
-      <h3 *ngIf="oPrestamistaObject == null">Datos del Prestamista</h3>
+      <h3 *ngIf="idPrestamista == null">Datos del Prestamista</h3>
 
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" placeholder="Nombre" formControlName="nombre" name="nombre"/>
@@ -64,8 +64,8 @@
         <label class="label-error">Ocurrió un error al registrar el usuario: {{errorMsj}}</label>
       </div>
 
-      <button type="button" [disabled]="formPrestamista.invalid" *ngIf="oPrestamistaObject == null" (click)="registrarPrestamista()">Ingresar</button>
-      <button type="button" [disabled]="nombre.invalid || numeroCuenta.invalid || capital.invalid" *ngIf="oPrestamistaObject" (click)="editarPrestamista()">Editar</button>
+      <button type="button" [disabled]="formPrestamista.invalid" *ngIf="idPrestamista == null" (click)="registrarPrestamista()">Ingresar</button>
+      <button type="button" [disabled]="nombre.invalid || numeroCuenta.invalid || capital.invalid" *ngIf="idPrestamista" (click)="editarPrestamista()">Editar</button>
     </form>
   </section>
 </main>

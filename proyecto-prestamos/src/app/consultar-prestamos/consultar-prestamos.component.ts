@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
-import { PrestamistaI } from '../Models/PrestamistaI';
 import { PrestamoI } from '../Models/PrestamoI';
 import { ResponseI } from '../Models/Response.interface';
-import { CrearAbonoComponent } from '../crear-abono/crear-abono.component';
 import { AbonoI } from '../Models/AbonoI';
 import { InteresI } from '../Models/InteresI';
 import { timeController } from '../util/timeController';
@@ -37,11 +35,9 @@ export class ConsultarPrestamosComponent {
       this.cerrarSesion();
     }
     else{
-      let oPrestamistaObject : PrestamistaI = JSON.parse(this.oPrestamistaString);
+      let idPrestamista : any = JSON.parse(this.oPrestamistaString);
 
-      console.log(oPrestamistaObject);
-
-      this.api.consultarPrestamosXPrestamista(oPrestamistaObject.idPrestamista).subscribe(
+      this.api.consultarPrestamosXPrestamista(idPrestamista).subscribe(
         (data)=>{
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {
@@ -161,9 +157,9 @@ export class ConsultarPrestamosComponent {
       this.cerrarSesion();
     }
     else{
-      let oPrestamistaObject : PrestamistaI = JSON.parse(this.oPrestamistaString);
+      let idPrestamista : any = JSON.parse(this.oPrestamistaString);
 
-      this.api.consultarPrestamosXPrestamista(oPrestamistaObject.idPrestamista).subscribe(
+      this.api.consultarPrestamosXPrestamista(idPrestamista).subscribe(
         (data)=>{
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {

@@ -18,7 +18,7 @@ export class CrearClienteComponent {
   @Input() dataEntrante: any;
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
-  oPrestamistaObject: PrestamistaI = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
+  idPrestamista: any = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
 
   cliente : ClienteI = {
     idCliente : 0,
@@ -82,7 +82,7 @@ export class CrearClienteComponent {
       numeroCuenta : this.numeroCuenta.value,
       puntaje: 0,
       maxPrestar: 0,
-      idPrestamista : this.oPrestamistaObject.idPrestamista
+      idPrestamista : this.idPrestamista
     }
 
     this.api.registrarCliente(this.cliente).subscribe(

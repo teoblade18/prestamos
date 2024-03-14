@@ -27,9 +27,9 @@ export class ConsultaClientesComponent {
       this.cerrarSesion();
     }
     else{
-      let oPrestamistaObject: PrestamistaI = JSON.parse(this.oPrestamistaString);
+      let idPrestamista: any = JSON.parse(this.oPrestamistaString);
 
-      this.api.consultarClientes(oPrestamistaObject.idPrestamista).subscribe(
+      this.api.consultarClientes(idPrestamista).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
           if (dataResponse.mensaje == 'ok') {

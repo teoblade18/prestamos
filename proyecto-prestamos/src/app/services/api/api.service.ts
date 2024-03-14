@@ -28,6 +28,14 @@ export class ApiService{
     );
   }
 
+  obtenerPrestamista(idPrestamista : number): Observable<ResponseI>{
+    let direccion = this.url + `api/Prestamista/Obtener/${idPrestamista}`
+
+    return this.http.get<ResponseI>(direccion).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   registrarPrestamista(form : PrestamistaI): Observable<ResponseI>{
 
     let direccion = this.url + "api/Prestamista/Guardar";
@@ -42,6 +50,14 @@ export class ApiService{
     let direccion = this.url + "api/Prestamista/Editar";
 
     return this.http.put<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  consultarCapitalPrestamista(idPrestamista : number): Observable<ResponseI>{
+    let direccion = this.url + `api/Prestamista/ConsultarCapital/${idPrestamista}`
+
+    return this.http.get<ResponseI>(direccion).pipe(
       catchError(this.handleError)
     );
   }
