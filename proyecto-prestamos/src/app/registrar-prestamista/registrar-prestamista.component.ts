@@ -64,6 +64,25 @@ export class RegistrarPrestamistaComponent {
   errorStatus: boolean = false;
   errorMsj: string = '';
 
+  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaObject: PrestamistaI = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
+
+  ngOnInit() : void{
+    if (this.oPrestamistaString == null){
+      this.cerrarSesion();
+    }else{
+        this.nombre.setValue(this.oPrestamistaObject.nombre);
+        this.capital.setValue(this.oPrestamistaObject.capital);
+        this.numeroCuenta.setValue(this.oPrestamistaObject.numeroCuenta);
+    }
+  }
+
+  cerrarSesion(){
+    localStorage.clear();
+    this.router.navigate(['/home']);
+  }
+
+
   registrarPrestamista() {
     this.prestamista = {
       idPrestamista: 0,
@@ -84,6 +103,29 @@ export class RegistrarPrestamistaComponent {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);
           this.router.navigate(['/menu']);
+        }
+      },
+
+      (error) => {
+        this.errorStatus = true;
+        this.errorMsj =  error.mensaje;
+      }
+    );
+  }
+
+  editarPrestamista(){
+    this.prestamista = this.oPrestamistaObject;
+    this.prestamista.nombre = this.nombre.value;
+    this.prestamista.numeroCuenta = this.numeroCuenta.value;
+    this.prestamista.capital = this.capital.value;
+
+    this.api.editarPrestamista(this.prestamista).subscribe(
+      (data) => {
+        let dataResponse: ResponseI = data;
+        if (dataResponse.mensaje == 'ok') {
+          let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
+          localStorage.setItem('oPrestamista', jsonResponse);
+          alert('Prestamista editado');
         }
       },
 

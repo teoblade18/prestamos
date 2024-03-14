@@ -36,6 +36,16 @@ export class ApiService{
       catchError(this.handleError)
     );
   }
+
+  editarPrestamista(form : PrestamistaI): Observable<ResponseI>{
+
+    let direccion = this.url + "api/Prestamista/Editar";
+
+    return this.http.put<ResponseI>(direccion, form).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   //#endregion
 
   //#region Cliente

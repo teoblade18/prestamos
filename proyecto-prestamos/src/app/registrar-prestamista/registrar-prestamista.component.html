@@ -1,33 +1,37 @@
 <main>
   <section>
-    <form [formGroup]="formPrestamista" (ngSubmit)="registrarPrestamista()">
-      <h1>Registrar Prestamista</h1>
+    <form [formGroup]="formPrestamista">
+      <h1 *ngIf="oPrestamistaObject == null">Registrar Prestamista</h1>
+      <h1 *ngIf="oPrestamistaObject">Cuenta Prestamista</h1>
 
-      <label for="nombreUsuario">Usuario:</label>
-      <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" formControlName="nombreUsuario"  name="nombreUsuario"/>
-      <div *ngIf="nombreUsuario.errors?.['required'] && nombreUsuario.touched" class="contain-label-error">
-        <label class="label-error">El usuario es requerido</label>
+      <div *ngIf="oPrestamistaObject == null">
+        <label for="nombreUsuario">Usuario:</label>
+        <input type="text" id="nombreUsuario" placeholder="Nombre de usuario" formControlName="nombreUsuario"  name="nombreUsuario"/>
+        <div *ngIf="nombreUsuario.errors?.['required'] && nombreUsuario.touched" class="contain-label-error">
+          <label class="label-error">El usuario es requerido</label>
+        </div>
+
+        <label for="contrasenia">Contraseña:</label>
+        <input type="password" id="contrasenia" placeholder="********" formControlName="contrasenia" name="contrasenia"/>
+        <div *ngIf="contrasenia.errors?.['pattern']" class="contain-label-error">
+          <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial</label>
+        </div>
+        <div *ngIf="contrasenia.errors?.['required'] && contrasenia.touched" class="contain-label-error">
+          <label class="label-error">La contraseña es requerida</label>
+        </div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="ejemplo@correo.com" formControlName="email" name="email"/>
+        <div *ngIf="email.errors?.['required'] && email.touched" class="contain-label-error">
+          <label class="label-error">El email es requerido</label>
+        </div>
+        <div *ngIf="email.errors?.['email']" class="contain-label-error">
+          <label class="label-error">El email debe ser válido</label>
+        </div>
       </div>
 
-      <label for="contrasenia">Contraseña:</label>
-      <input type="password" id="contrasenia" placeholder="********" formControlName="contrasenia" name="contrasenia"/>
-      <div *ngIf="contrasenia.errors?.['pattern']" class="contain-label-error">
-        <label class="label-error">La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial</label>
-      </div>
-      <div *ngIf="contrasenia.errors?.['required'] && contrasenia.touched" class="contain-label-error">
-        <label class="label-error">La contraseña es requerida</label>
-      </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" placeholder="ejemplo@correo.com" formControlName="email" name="email"/>
-      <div *ngIf="email.errors?.['required'] && email.touched" class="contain-label-error">
-        <label class="label-error">El email es requerido</label>
-      </div>
-      <div *ngIf="email.errors?.['email']" class="contain-label-error">
-        <label class="label-error">El email debe ser válido</label>
-      </div>
-
-      <h3>Datos del Prestamista</h3>
+      <h3 *ngIf="oPrestamistaObject == null">Datos del Prestamista</h3>
 
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" placeholder="Nombre" formControlName="nombre" name="nombre"/>
@@ -60,7 +64,8 @@
         <label class="label-error">Ocurrió un error al registrar el usuario: {{errorMsj}}</label>
       </div>
 
-      <button type="submit" [disabled]="formPrestamista.invalid">Ingresar</button>
+      <button type="button" [disabled]="formPrestamista.invalid" *ngIf="oPrestamistaObject == null" (click)="registrarPrestamista()">Ingresar</button>
+      <button type="button" [disabled]="nombre.invalid || numeroCuenta.invalid || capital.invalid" *ngIf="oPrestamistaObject" (click)="editarPrestamista()">Editar</button>
     </form>
   </section>
 </main>

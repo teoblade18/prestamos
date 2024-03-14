@@ -13,7 +13,7 @@ import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes
 import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
 import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
 import { CrearAbonoComponent } from './crear-abono/crear-abono.component';
-import { CrearInteresComponent } from './crear-interes/crear-interes.component'
+import { CrearInteresComponent } from './crear-interes/crear-interes.component';
 
 @NgModule({
   declarations: [
