@@ -65,14 +65,12 @@ export class RegistrarPrestamistaComponent {
   errorMsj: string = '';
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
-  idPrestamista: any = this.oPrestamistaString ? this.oPrestamistaString : 0;
+  idPrestamista: any = this.oPrestamistaString;
 
   prestamistaConsultado : any;
 
   ngOnInit() : void{
-    if (this.oPrestamistaString == null){
-      this.cerrarSesion();
-    }else{
+    if (this.oPrestamistaString != null){
       this.api.obtenerPrestamista(this.idPrestamista).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
