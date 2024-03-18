@@ -24,7 +24,9 @@ export class ApiService{
     let direccion = this.url + "api/Prestamista/ConsultarXUsuario"
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -32,7 +34,9 @@ export class ApiService{
     let direccion = this.url + `api/Prestamista/Obtener/${idPrestamista}`
 
     return this.http.get<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -41,7 +45,9 @@ export class ApiService{
     let direccion = this.url + "api/Prestamista/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -50,7 +56,9 @@ export class ApiService{
     let direccion = this.url + "api/Prestamista/Editar";
 
     return this.http.put<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -58,7 +66,9 @@ export class ApiService{
     let direccion = this.url + `api/Prestamista/ConsultarCapital/${idPrestamista}`
 
     return this.http.get<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -70,7 +80,9 @@ export class ApiService{
     let direccion = this.url + "api/Cliente/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -79,7 +91,9 @@ export class ApiService{
     let direccion = this.url + `api/Cliente/ObtenerClientesXPrestamista/${idPrestamista}`;
 
     return this.http.get<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -88,7 +102,9 @@ export class ApiService{
     let direccion = this.url + "api/Cliente/Editar";
 
     return this.http.put<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -97,7 +113,9 @@ export class ApiService{
     let direccion = this.url + `api/Cliente/Eliminar/${idCliente}`;
 
     return this.http.delete<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
   //#endregion
@@ -109,7 +127,9 @@ export class ApiService{
     let direccion = this.url + "api/Prestamo/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -118,7 +138,9 @@ export class ApiService{
     let direccion = this.url + `api/Prestamo/ConsultarNumeroPrestamosXCliente/${idCliente}`;
 
     return this.http.get<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -126,7 +148,9 @@ export class ApiService{
     let direccion = this.url + `api/Prestamo/ConsultarPrestamosXPrestamista/${idPrestamista}`;
 
     return this.http.get<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -134,7 +158,9 @@ export class ApiService{
     let direccion = this.url + `api/Prestamo/Cancelar`;
 
     return this.http.put<ResponseI>(direccion, prestamo).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -147,7 +173,9 @@ export class ApiService{
     let direccion = this.url + "api/Abono/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -156,7 +184,9 @@ export class ApiService{
     let direccion = this.url + `api/Abono/Eliminar/${idAbono}`;
 
     return this.http.delete<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -169,7 +199,9 @@ export class ApiService{
     let direccion = this.url + "api/Interes/Guardar";
 
     return this.http.post<ResponseI>(direccion, form).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 
@@ -178,7 +210,9 @@ export class ApiService{
     let direccion = this.url + `api/Interes/Eliminar/${idInteres}`;
 
     return this.http.delete<ResponseI>(direccion).pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
     );
   }
 

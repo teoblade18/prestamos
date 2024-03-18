@@ -5,6 +5,7 @@ import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
 import { ResponseI } from '../Models/Response.interface';
 import { encrypt } from '../util/util-encrypt';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-usuario',
@@ -59,8 +60,14 @@ export class UsuarioComponent {
         }
       },
     (error) => {
+
       this.errorStatus = true;
-      this.errorMsj =  error.mensaje;
+      this.errorMsj =  error.error.mensaje;
+
+      if(this.errorMsj == null){
+        this.errorMsj =  environment.mensajes.errorPredeterminado;
+      }
+
     });
   }
 
