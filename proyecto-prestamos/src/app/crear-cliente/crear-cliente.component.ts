@@ -88,7 +88,7 @@ export class CrearClienteComponent {
     this.api.registrarCliente(this.cliente).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        if (dataResponse.mensaje == 'Cliente registrado') {
+        if (dataResponse.mensaje == 'ok') {
           this.router.navigate(['/consultar-clientes']);
         }
       },

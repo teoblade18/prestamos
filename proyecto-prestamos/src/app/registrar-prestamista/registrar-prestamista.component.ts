@@ -113,7 +113,7 @@ export class RegistrarPrestamistaComponent {
     this.api.registrarPrestamista(this.prestamista).subscribe(
       (data) => {
         let dataResponse: ResponseI = data;
-        if (dataResponse.mensaje == 'Prestamista registrado') {
+        if (dataResponse.mensaje == 'ok') {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);
           this.router.navigate(['/menu']);
