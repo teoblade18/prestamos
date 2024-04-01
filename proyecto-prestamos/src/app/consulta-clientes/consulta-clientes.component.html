@@ -10,9 +10,9 @@
 
   <h1>Lista de Clientes</h1>
 
-  <a routerLink="/crear-cliente">Nuevo cliente</a>
+  <button class="boton-crear-nuevo" routerLink="/crear-cliente"> <img src="./../../assets/imgs/plus.png" alt=""> Nuevo Cliente</button>
 
-  <br><br>
+  <br>
 
   <section *ngFor="let cliente of (clientes)" class="cliente-box">
     <div *ngIf="cliente.idCliente == clienteEditando">

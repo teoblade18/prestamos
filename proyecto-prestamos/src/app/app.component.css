@@ -28,6 +28,19 @@ h2,h3{
   color: #3A4D39;
 }
 
+.boton-crear-nuevo{
+  width: auto;
+  background-color: transparent;
+  color: #79AC78;
+  font-weight: bold;
+  border-color: #79AC78;
+  border: solid 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+}
+
 label,
 input,
 button,
@@ -84,3 +97,5 @@ a {
 .contain-label-error{
   margin-bottom: 10px;
 }
+
+

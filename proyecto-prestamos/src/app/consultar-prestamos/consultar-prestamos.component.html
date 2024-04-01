@@ -10,9 +10,9 @@
 
     <h1>Lista de Préstamos</h1>
 
-    <a routerLink="/crear-prestamo">Nuevo Préstamo</a>
+    <button class="boton-crear-nuevo" routerLink="/crear-prestamo"> <img src="./../../assets/imgs/plus.png" alt=""> Nuevo Préstamo</button>
 
-    <br><br>
+    <br>
 
     <section *ngFor="let prestamo of (prestamos)" class="prestamo-box">
       <div *ngIf="prestamo.idPrestamo == prestamoEnEdicion">
