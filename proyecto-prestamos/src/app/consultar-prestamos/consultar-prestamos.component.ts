@@ -6,6 +6,8 @@ import { ResponseI } from '../Models/Response.interface';
 import { AbonoI } from '../Models/AbonoI';
 import { InteresI } from '../Models/InteresI';
 import { timeController } from '../util/timeController';
+import { ClienteI } from '../Models/ClienteI';
+import { NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-consultar-prestamos',
@@ -19,7 +21,9 @@ export class ConsultarPrestamosComponent {
 
   oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
 
+  prestamosCopia: PrestamoI[] = [];
   prestamos: PrestamoI[] = [];
+  clientes : ClienteI[] = [];
 
   errorStatus: boolean = false;
   errorMsj: string = "";
@@ -43,11 +47,30 @@ export class ConsultarPrestamosComponent {
           if (dataResponse.mensaje == 'ok') {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
+            this.prestamosCopia = this.prestamos;
           }
           else{
             this.errorStatus = true;
             this.errorMsj =  "No se encontraron prestamos para este prestamista.";
           }
+        }
+      );
+
+      this.api.consultarClientes(idPrestamista).subscribe(
+        (data) => {
+          let dataResponse: ResponseI = data;
+          if (dataResponse.mensaje == 'ok') {
+            let clientesString = JSON.stringify(dataResponse.response)
+            this.clientes = JSON.parse(clientesString);
+          }else{
+            this.errorStatus = true;
+            this.errorMsj =  "No se encontraron clientes para este prestamista.";
+          }
+        },
+
+        (error) => {
+          this.errorStatus = true;
+          this.errorMsj =  error.mensaje;
         }
       );
     }
@@ -56,6 +79,15 @@ export class ConsultarPrestamosComponent {
   cerrarSesion(){
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  filtrarXCliente(event : any){
+    if(event.target.value == 0){
+      this.prestamos = this.prestamosCopia;
+    }else{
+      this.prestamos = this.prestamosCopia.filter(p => p.idCliente == event.target.value);
+    }
+
   }
 
   prestamoEnEdicion : number = 0;
@@ -165,6 +197,7 @@ export class ConsultarPrestamosComponent {
           if (dataResponse.mensaje == 'ok') {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
+            this.prestamosCopia = this.prestamos;
           }
           else{
             this.errorStatus = true;

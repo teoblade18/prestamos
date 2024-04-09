@@ -28,17 +28,30 @@ h2,h3{
   color: #3A4D39;
 }
 
+.container-botones-header{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .boton-crear-nuevo{
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
   width: auto;
   background-color: transparent;
   color: #79AC78;
   font-weight: bold;
   border-color: #79AC78;
-  border: solid 2px;
+  border: solid 1px;
   display: flex;
   align-items: center;
   gap: 5px;
   margin: 0;
+  padding: 2px 5px;
+}
+
+.select-cliente-filtro{
+  width: 60%;
+  margin-bottom: 0px;
 }
 
 label,
