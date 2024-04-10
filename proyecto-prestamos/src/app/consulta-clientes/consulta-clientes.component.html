@@ -10,7 +10,9 @@
 
   <h1>Lista de Clientes</h1>
 
-  <button class="boton-crear-nuevo" routerLink="/crear-cliente"> <img src="./../../assets/imgs/plus.png" alt=""> Nuevo Cliente</button>
+  <div class="container-botones-header">
+    <button class="boton-crear-nuevo" routerLink="/crear-cliente"> <img src="./../../assets/imgs/plus.png" alt=""> Nuevo Cliente</button>
+  </div>
 
   <br>
 
@@ -22,6 +24,10 @@
       <div class="header">
         <h2>{{ cliente.nombre }}</h2>
         <div class="botones-header">
+          <div>
+            <button class="editar-btn" [routerLink]="['/consultar-prestamos', cliente.idCliente]"
+            routerLinkActive="router-link-active"><img src="./../../assets/imgs/flecha-derecha.png" alt="irPrestamo"></button>
+          </div>
           <div>
             <button class="editar-btn" (click)="editarCliente(cliente.idCliente)"><img src="./../../assets/imgs/edit.png" alt="editar"></button>
           </div>

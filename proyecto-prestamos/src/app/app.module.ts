@@ -33,7 +33,7 @@ import { CrearInteresComponent } from './crear-interes/crear-interes.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

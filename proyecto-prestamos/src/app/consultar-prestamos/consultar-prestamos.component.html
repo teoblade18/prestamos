@@ -13,7 +13,7 @@
     <div class="container-botones-header">
       <button class="boton-crear-nuevo" routerLink="/crear-prestamo"> <img src="./../../assets/imgs/plus.png" alt=""> Nuevo Préstamo</button>
 
-      <select name="cliente" id="cliente" [value]="0" class="select-cliente-filtro" (change)="filtrarXCliente($event)">
+      <select name="cliente" id="cliente" class="select-cliente-filtro" [(ngModel)]="clienteSeleccionado" (change)="filtrarXCliente($event)">
         <option value="0">Seleccionar cliente...</option>
         <option *ngFor="let item of clientes" [value]="item.idCliente">{{item.nombre}}</option>
       </select>

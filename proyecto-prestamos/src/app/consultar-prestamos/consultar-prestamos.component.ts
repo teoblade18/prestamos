@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrestamoI } from '../Models/PrestamoI';
 import { ResponseI } from '../Models/Response.interface';
 import { AbonoI } from '../Models/AbonoI';
@@ -15,7 +15,7 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['../app.component.css','./consultar-prestamos.component.css']
 })
 export class ConsultarPrestamosComponent {
-  constructor (private api: ApiService, private router: Router){
+  constructor (private api: ApiService, private router: Router, private route: ActivatedRoute){
 
   }
 
@@ -24,6 +24,8 @@ export class ConsultarPrestamosComponent {
   prestamosCopia: PrestamoI[] = [];
   prestamos: PrestamoI[] = [];
   clientes : ClienteI[] = [];
+
+  clienteSeleccionado: number = this.route?.snapshot?.params['id']? this.route?.snapshot?.params['id'] : 0;
 
   errorStatus: boolean = false;
   errorMsj: string = "";
@@ -35,6 +37,8 @@ export class ConsultarPrestamosComponent {
   fechaHoy : string = this.oTime.obtenerFechaHoy();
 
   ngOnInit() : void{
+    console.log(this.clienteSeleccionado);
+
     if (this.oPrestamistaString == null){
       this.cerrarSesion();
     }
@@ -48,6 +52,13 @@ export class ConsultarPrestamosComponent {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
             this.prestamosCopia = this.prestamos;
+
+            let idClienteFiltrado = this.route?.snapshot?.params['id'];
+
+            if(idClienteFiltrado != null){
+              this.clienteSeleccionado = idClienteFiltrado;
+              this.filtrarXCliente({ target: { value: idClienteFiltrado } });
+            }
           }
           else{
             this.errorStatus = true;
@@ -73,6 +84,7 @@ export class ConsultarPrestamosComponent {
           this.errorMsj =  error.mensaje;
         }
       );
+
     }
   }
 
@@ -82,6 +94,7 @@ export class ConsultarPrestamosComponent {
   }
 
   filtrarXCliente(event : any){
+
     if(event.target.value == 0){
       this.prestamos = this.prestamosCopia;
     }else{

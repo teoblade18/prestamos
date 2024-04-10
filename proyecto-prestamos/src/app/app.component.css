@@ -46,12 +46,14 @@ h2,h3{
   align-items: center;
   gap: 5px;
   margin: 0;
-  padding: 2px 5px;
+  padding: 5px 5px;
 }
 
 .select-cliente-filtro{
   width: 60%;
   margin-bottom: 0px;
+  border-color: #79AC78;
+  border: solid 1px;
 }
 
 label,

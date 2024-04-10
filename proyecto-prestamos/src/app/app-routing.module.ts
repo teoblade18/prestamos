@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'consultar-clientes', component: ConsultaClientesComponent},
   {path: 'crear-prestamo', component: CrearPrestamoComponent},
   {path: 'consultar-prestamos', component: ConsultarPrestamosComponent},
+  {path: 'consultar-prestamos/:id', component: ConsultarPrestamosComponent},
   {path: '**', component: UsuarioComponent}
 ];
 
