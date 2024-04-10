@@ -25,7 +25,7 @@ export class ConsultarPrestamosComponent {
   prestamos: PrestamoI[] = [];
   clientes : ClienteI[] = [];
 
-  clienteSeleccionado: number = this.route?.snapshot?.params['id']? this.route?.snapshot?.params['id'] : 0;
+  clienteSeleccionado: number = 0;
 
   errorStatus: boolean = false;
   errorMsj: string = "";
@@ -51,8 +51,9 @@ export class ConsultarPrestamosComponent {
           if (dataResponse.mensaje == 'ok') {
             let prestamosString = JSON.stringify(dataResponse.response)
             this.prestamos = JSON.parse(prestamosString);
-            this.prestamosCopia = this.prestamos;
+            this.prestamosCopia = this.prestamos; //guarda una copia para los filtros
 
+            //Revisa si la URL trae un id deCliente y filtra los préstamos a partir del mismo
             let idClienteFiltrado = this.route?.snapshot?.params['id'];
 
             if(idClienteFiltrado != null){
