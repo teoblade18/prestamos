@@ -16,6 +16,7 @@ import { CrearAbonoComponent } from './crear-abono/crear-abono.component';
 import { CrearInteresComponent } from './crear-interes/crear-interes.component';
 import { HistorialPrestamosComponent } from './historial-prestamos/historial-prestamos.component';
 import { NgPipesModule } from 'ngx-pipes';
+import { ContactoComponent } from './contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NgPipesModule } from 'ngx-pipes';
     ConsultarPrestamosComponent,
     CrearAbonoComponent,
     CrearInteresComponent,
-    HistorialPrestamosComponent
+    HistorialPrestamosComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,

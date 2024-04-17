@@ -9,6 +9,7 @@ import { ConsultaClientesComponent } from './consulta-clientes/consulta-clientes
 import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.component';
 import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
 import { HistorialPrestamosComponent } from './historial-prestamos/historial-prestamos.component';
+import { ContactoComponent } from './contacto/contacto.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'consultar-prestamos', component: ConsultarPrestamosComponent},
   {path: 'consultar-prestamos/:id', component: ConsultarPrestamosComponent},
   {path: 'historial-prestamos',component: HistorialPrestamosComponent},
+  {path: 'contacto', component: ContactoComponent},
   {path: '**', component: UsuarioComponent}
 ];
 

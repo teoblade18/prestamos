@@ -56,6 +56,9 @@ export class UsuarioComponent {
           //Esta linea recupera el json: JSON.parse(localStorage.getItem('oPrestamista'))
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
           localStorage.setItem('oPrestamista', jsonResponse);
+          window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('oPrestamista');
+          });
           this.router.navigate(['/menu']);
         }
       },
