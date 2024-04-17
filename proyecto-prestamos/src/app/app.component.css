@@ -9,6 +9,17 @@ body {
   background-color: #f2f2f2;
 }
 
+.boton-retorno{
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  width: auto;
+}
+
+.boton-retorno img{
+  width: 20px;
+}
+
 main {
   width: 90%;
   max-width: 400px;

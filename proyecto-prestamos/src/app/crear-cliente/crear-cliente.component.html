@@ -1,8 +1,13 @@
 <main>
   <section>
     <form [formGroup]="formCliente">
-      <h1 *ngIf="dataEntrante == null">Registrar Cliente</h1>
-      <h1 *ngIf="dataEntrante != null">Editar Cliente</h1>
+      <h1 *ngIf="dataEntrante == null">
+        <button class="boton-retorno" routerLink="/consultar-clientes"><img  src="./../../assets/imgs/flecha-retorno.png" alt=""></button>
+        Registrar Cliente
+      </h1>
+      <h1 *ngIf="dataEntrante != null">
+        Editar Cliente
+      </h1>
 
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" placeholder="Nombre" formControlName="nombre" name="nombre"/>

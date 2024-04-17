@@ -1,8 +1,14 @@
 <main>
   <section>
     <form [formGroup]="formPrestamista">
-      <h1 *ngIf="idPrestamista == null">Registrar Prestamista</h1>
-      <h1 *ngIf="idPrestamista">Cuenta Prestamista</h1>
+      <h1 *ngIf="idPrestamista == null">
+        <button class="boton-retorno" routerLink="/home"><img  src="./../../assets/imgs/home.png" alt=""></button>
+        Registrar Prestamista
+      </h1>
+      <h1 *ngIf="idPrestamista">
+        <button class="boton-retorno" routerLink="/menu"><img  src="./../../assets/imgs/home.png" alt=""></button>
+        Cuenta Prestamista
+      </h1>
 
       <div *ngIf="idPrestamista == null">
         <label for="nombreUsuario">Usuario:</label>
