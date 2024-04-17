@@ -73,7 +73,7 @@ export class CrearPrestamoComponent {
   errorStatus: boolean = false;
   errorMsj: string = '';
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
   idPrestamista: any;
   numeroPrestamosXCliente: number = 0;
 
@@ -105,7 +105,7 @@ export class CrearPrestamoComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 

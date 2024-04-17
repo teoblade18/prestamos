@@ -17,7 +17,7 @@ export class CrearClienteComponent {
 
   @Input() dataEntrante: any;
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
   idPrestamista: any = this.oPrestamistaString ? JSON.parse(this.oPrestamistaString) : {};
 
   cliente : ClienteI = {
@@ -50,7 +50,7 @@ export class CrearClienteComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 

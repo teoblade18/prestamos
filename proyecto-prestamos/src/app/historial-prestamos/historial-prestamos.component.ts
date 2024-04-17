@@ -14,7 +14,7 @@ export class HistorialPrestamosComponent {
 
   constructor(private api: ApiService, private router: Router){}
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
   idPrestamista: any;
 
   errorStatus: boolean = false;
@@ -221,7 +221,7 @@ export class HistorialPrestamosComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 }

@@ -64,7 +64,7 @@ export class RegistrarPrestamistaComponent {
   errorStatus: boolean = false;
   errorMsj: string = '';
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
   idPrestamista: any = this.oPrestamistaString;
 
   prestamistaConsultado : any;
@@ -92,7 +92,7 @@ export class RegistrarPrestamistaComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 
@@ -115,7 +115,7 @@ export class RegistrarPrestamistaComponent {
         let dataResponse: ResponseI = data;
         if (dataResponse.mensaje == 'ok') {
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
-          localStorage.setItem('oPrestamista', jsonResponse);
+          sessionStorage.setItem('oPrestamista', jsonResponse);
           this.router.navigate(['/menu']);
         }
       },

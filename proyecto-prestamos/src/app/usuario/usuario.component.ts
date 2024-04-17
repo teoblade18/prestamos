@@ -53,12 +53,8 @@ export class UsuarioComponent {
         let dataResponse: ResponseI = data;
 
         if (dataResponse.mensaje == 'ok') {
-          //Esta linea recupera el json: JSON.parse(localStorage.getItem('oPrestamista'))
           let jsonResponse = JSON.stringify(dataResponse.response); // Convertir a JSON
-          localStorage.setItem('oPrestamista', jsonResponse);
-          // window.addEventListener('beforeunload', () => {
-          //   localStorage.removeItem('oPrestamista');
-          // });
+          sessionStorage.setItem('oPrestamista', jsonResponse);
           this.router.navigate(['/menu']);
         }
       },

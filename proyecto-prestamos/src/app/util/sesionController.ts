@@ -4,14 +4,14 @@ export class SesionController {
 
   constructor( private router: Router) {}
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
 
   validarSesion(){
 
-    this.oPrestamistaString = localStorage.getItem('oPrestamista');
+    this.oPrestamistaString = sessionStorage.getItem('oPrestamista');
 
     if (this.oPrestamistaString == null){
-      localStorage.clear();
+      sessionStorage.clear();
       this.router.navigate(['/home']);
     }
   }

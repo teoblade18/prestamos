@@ -10,7 +10,7 @@ export class MenuComponent {
 
   constructor( private router: Router) {}
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
 
   ngOnInit(): void {
     if (this.oPrestamistaString == null){
@@ -19,7 +19,7 @@ export class MenuComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 

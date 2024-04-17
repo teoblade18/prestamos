@@ -20,7 +20,7 @@ export class ConsultaClientesComponent {
   clientes : ClienteI[] = [];
   clienteEditando: number= 0;
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
 
   ngOnInit(): void {
     if (this.oPrestamistaString == null){
@@ -50,7 +50,7 @@ export class ConsultaClientesComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 

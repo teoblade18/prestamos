@@ -19,7 +19,7 @@ export class ConsultarPrestamosComponent {
 
   }
 
-  oPrestamistaString: string | null = localStorage.getItem('oPrestamista');
+  oPrestamistaString: string | null = sessionStorage.getItem('oPrestamista');
 
   prestamosCopia: PrestamoI[] = [];
   prestamos: PrestamoI[] = [];
@@ -88,7 +88,7 @@ export class ConsultarPrestamosComponent {
   }
 
   cerrarSesion(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 
