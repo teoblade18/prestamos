@@ -7,6 +7,7 @@ export interface PrestamoI{
   idCliente : number,
   idPrestamista : number,
   fechaInicial: string,
+  fechaFinal: string,
   porcentaje: number,
   tipoIntereses: string,
   diaCorte : number,

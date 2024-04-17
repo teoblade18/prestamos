@@ -14,6 +14,8 @@ import { CrearPrestamoComponent } from './crear-prestamo/crear-prestamo.componen
 import { ConsultarPrestamosComponent } from './consultar-prestamos/consultar-prestamos.component';
 import { CrearAbonoComponent } from './crear-abono/crear-abono.component';
 import { CrearInteresComponent } from './crear-interes/crear-interes.component';
+import { HistorialPrestamosComponent } from './historial-prestamos/historial-prestamos.component';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { CrearInteresComponent } from './crear-interes/crear-interes.component';
     CrearPrestamoComponent,
     ConsultarPrestamosComponent,
     CrearAbonoComponent,
-    CrearInteresComponent
+    CrearInteresComponent,
+    HistorialPrestamosComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { CrearInteresComponent } from './crear-interes/crear-interes.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgPipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

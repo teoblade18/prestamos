@@ -37,8 +37,6 @@ export class ConsultarPrestamosComponent {
   fechaHoy : string = this.oTime.obtenerFechaHoy();
 
   ngOnInit() : void{
-    console.log(this.clienteSeleccionado);
-
     if (this.oPrestamistaString == null){
       this.cerrarSesion();
     }
@@ -113,6 +111,7 @@ export class ConsultarPrestamosComponent {
           let dataResponse: ResponseI = data
           if (dataResponse.mensaje == 'ok') {
             this.recalcularPrestamos();
+            this.clienteSeleccionado = 0;
           }
           else{
             this.errorStatus = true;

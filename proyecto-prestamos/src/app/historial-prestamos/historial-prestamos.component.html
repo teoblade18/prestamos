@@ -1,0 +1,60 @@
+<h1>Historial de préstamos</h1>
+<main>
+
+  <div class="group-select">
+    <select name="cliente" id="cliente" [(ngModel)]="clienteSeleccionado" (change)="filtrarXCliente($event)">
+      <option value="0">Seleccionar cliente...</option>
+      <option *ngFor="let item of clientes" [value]="item.idCliente">{{item.nombre}}</option>
+    </select>
+
+    <select name="estado" id="estado" class="select" [(ngModel)]="estadoSeleccionado" (change)="filtrarXEstado($event)">
+      <option value="0">Seleccionar estado...</option>
+      <option value= "Abonado">Abonado</option>
+      <option value= "Impago">Impago</option>
+      <option value= "Pagado">Pagado</option>
+      <option value= "Cancelado">Cancelado</option>
+    </select>
+  </div>
+
+
+  <table>
+    <thead>
+        <tr>
+            <th (click)="ordenar(1)">Nombre Cliente</th>
+            <th (click)="ordenar(2)">Estado</th>
+            <th (click)="ordenar(3)">Monto Inicial</th>
+            <th (click)="ordenar(4)">Total Abonos</th>
+            <th (click)="ordenar(5)">Total Intereses</th>
+            <th (click)="ordenar(6)">Porcentaje</th>
+            <th (click)="ordenar(7)">Fecha Inicio</th>
+            <th (click)="ordenar(8)">Fecha Fin</th>
+            <th (click)="ordenar(9)">Fecha Pago Estimada</th>
+            <th (click)="ordenar(10)">Deuda Actual</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let item of historialPrestamos; let i = index">
+        <td>{{item.oCliente.nombre}}</td>
+        <td>{{item.estado}}</td>
+        <td>{{item.montoInicial}}</td>
+        <td>{{item.totalAbonos}}</td>
+        <td>{{item.totalIntereses}}</td>
+        <td>{{item.porcentaje}}</td>
+        <td>{{item.fechaInicial}}</td>
+        <td>{{item.fechaInicial}}</td>
+        <td>{{item.fechaPago}}</td>
+        <td>{{item.deudaActual}}</td>
+    </tr>
+        <tr class="total-row">
+            <td colspan="2">Total</td>
+            <td>{{sumaMontoInicial}}</td>
+            <td>{{sumaTotalAbonos}}</td>
+            <td>{{sumaTotalIntereses}}</td>
+            <td colspan="4"></td>
+            <td>{{sumaTotalDeudaActual}}</td>
+        </tr>
+    </tbody>
+  </table>
+
+</main>
+

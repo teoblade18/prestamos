@@ -164,6 +164,16 @@ export class ApiService{
     );
   }
 
+  consultarHistorialPrestamos(idPrestamista : number): Observable<ResponseI>{
+    let direccion = this.url + `api/Prestamo/ConsultarHistorialPrestamos/${idPrestamista}`;
+
+    return this.http.get<ResponseI>(direccion).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
+  }
+
   //#endregion
 
   //#region Abono
