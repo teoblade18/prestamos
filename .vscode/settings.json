@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e13d3479-fb36-4df6-990f-d5a294cfedd9/resourceGroups/grupo-recursos/providers/Microsoft.Web/sites/lenderap",
+    "appService.deploySubpath": "proyecto-prestamos\\dist\\proyecto-prestamos"
+}
