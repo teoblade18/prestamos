@@ -15,7 +15,7 @@ import { InteresI } from "src/app/Models/InteresI";
 
 export class ApiService{
 
-  url: string = "https://lenderap.somee.com/"
+  url: string = "https://lender-api.azurewebsites.net/"
   //http://localhost:5032
 
   constructor(private http:HttpClient){  }
