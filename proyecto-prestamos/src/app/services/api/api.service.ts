@@ -64,7 +64,7 @@ export class ApiService{
   }
 
   consultarCapitalPrestamista(idPrestamista : number): Observable<ResponseI>{
-    let direccion = this.url + `api/Prestamista/ConsultarCapital/${idPrestamista}`
+    let direccion = this.url + `api/Prestamista/ConsultarCapitalXPrestamista/${idPrestamista}`
 
     return this.http.get<ResponseI>(direccion).pipe(
       catchError((error: HttpErrorResponse) => {
